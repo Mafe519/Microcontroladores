@@ -1,0 +1,347 @@
+CCS PCM C Compiler, Version 4.104, 5967               31-jul-24 20:37
+
+               Filename: C:\Micro\Miniteste\mainMiniTeste.lst
+
+               ROM used: 685 words (8%)
+                         Largest free fragment is 2048
+               RAM used: 8 (2%) at main() level
+                         29 (8%) worst case
+               Stack:    2 locations
+
+*
+0000:  MOVLW  02
+0001:  MOVWF  0A
+0002:  GOTO   24D
+0003:  NOP
+.................... //#include "C:\Micro\Miniteste\mainMiniTeste.h" 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+*
+0118:  MOVF   77,W
+0119:  MOVWF  27
+011A:  MOVF   78,W
+011B:  MOVWF  28
+011C:  MOVF   79,W
+011D:  MOVWF  29
+011E:  MOVF   7A,W
+011F:  MOVWF  2A
+0120:  MOVF   2A,W
+0121:  MOVWF  2E
+0122:  MOVF   29,W
+0123:  MOVWF  2D
+0124:  MOVF   28,W
+0125:  MOVWF  2C
+0126:  MOVF   27,W
+0127:  MOVWF  2B
+0128:  CLRF   32
+0129:  CLRF   31
+012A:  MOVLW  16
+012B:  MOVWF  30
+012C:  MOVLW  87
+012D:  MOVWF  2F
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=6000000) 
+*
+0236:  MOVLW  22
+0237:  MOVWF  04
+0238:  BCF    03.7
+0239:  MOVF   00,W
+023A:  BTFSC  03.2
+023B:  GOTO   24A
+023C:  MOVLW  01
+023D:  MOVWF  78
+023E:  CLRF   77
+023F:  DECFSZ 77,F
+0240:  GOTO   23F
+0241:  DECFSZ 78,F
+0242:  GOTO   23E
+0243:  MOVLW  F1
+0244:  MOVWF  77
+0245:  DECFSZ 77,F
+0246:  GOTO   245
+0247:  NOP
+0248:  DECFSZ 00,F
+0249:  GOTO   23C
+024A:  BCF    0A.3
+024B:  BCF    0A.4
+024C:  GOTO   2AB (RETURN)
+....................  
+.................... #define VELOCIDADE_PIN PIN_A0 
+.................... #define CINTO_MOTORISTA PIN_B0 
+.................... #define CINTO_PASSAGEIRO PIN_B1 
+.................... #define BUZZER_PIN PIN_B2 
+....................  
+....................  
+.................... void init_adc(){ 
+....................    setup_adc_ports(AN0); 
+*
+0004:  BSF    03.5
+0005:  BCF    1F.0
+0006:  BSF    1F.1
+0007:  BSF    1F.2
+0008:  BSF    1F.3
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+0009:  BCF    1F.6
+000A:  BCF    03.5
+000B:  BCF    1F.6
+000C:  BCF    1F.7
+000D:  BSF    03.5
+000E:  BCF    1F.7
+000F:  BCF    03.5
+0010:  BSF    1F.0
+....................    set_adc_channel(0); 
+0011:  MOVLW  00
+0012:  MOVWF  78
+0013:  MOVF   1F,W
+0014:  ANDLW  C7
+0015:  IORWF  78,W
+0016:  MOVWF  1F
+....................    delay_us(10); 
+0017:  MOVLW  04
+0018:  MOVWF  77
+0019:  DECFSZ 77,F
+001A:  GOTO   019
+001B:  GOTO   01C
+.................... } 
+001C:  BCF    0A.3
+001D:  BCF    0A.4
+001E:  GOTO   25C (RETURN)
+....................  
+.................... int read_velocity(){ 
+001F:  BSF    1F.2
+0020:  BTFSC  1F.2
+0021:  GOTO   020
+0022:  MOVF   1E,W
+0023:  CLRF   29
+0024:  MOVWF  28
+*
+0041:  MOVF   7A,W
+0042:  MOVWF  2B
+0043:  MOVF   79,W
+0044:  MOVWF  2A
+0045:  MOVF   78,W
+0046:  MOVWF  29
+0047:  MOVF   77,W
+0048:  MOVWF  28
+0049:  CLRF   2F
+004A:  CLRF   2E
+004B:  MOVLW  7F
+004C:  MOVWF  2D
+004D:  MOVLW  86
+004E:  MOVWF  2C
+*
+01A2:  MOVF   7A,W
+01A3:  MOVWF  26
+01A4:  MOVF   79,W
+01A5:  MOVWF  25
+01A6:  MOVF   78,W
+01A7:  MOVWF  24
+01A8:  MOVF   77,W
+01A9:  MOVWF  23
+....................    int adc_value = read_adc(); 
+....................    float velocity = (adc_value/255.0) * 300.0; 
+....................    return (int) velocity; 
+01AA:  MOVF   26,W
+01AB:  MOVWF  2A
+01AC:  MOVF   25,W
+01AD:  MOVWF  29
+01AE:  MOVF   24,W
+01AF:  MOVWF  28
+01B0:  MOVF   23,W
+01B1:  MOVWF  27
+*
+01D0:  MOVF   78,W
+.................... } 
+01D1:  BCF    0A.3
+01D2:  BCF    0A.4
+01D3:  GOTO   290 (RETURN)
+....................  
+.................... int is_seatBelt_on(int pin){ 
+....................    return input(pin); 
+*
+020F:  MOVF   22,W
+0210:  MOVWF  23
+0211:  MOVLW  01
+0212:  MOVWF  24
+0213:  CLRF   26
+0214:  MOVLW  80
+0215:  MOVWF  25
+0216:  GOTO   1D4
+0217:  MOVF   22,W
+0218:  MOVWF  23
+0219:  CLRF   25
+021A:  CLRF   24
+021B:  GOTO   1F6
+021C:  MOVLW  00
+021D:  BTFSC  78.0
+021E:  MOVLW  01
+021F:  MOVWF  78
+.................... } 
+0220:  RETURN
+....................  
+.................... void sound_buzzer(){ 
+....................    output_high(BUZZER_PIN); 
+0221:  BSF    03.5
+0222:  BCF    06.2
+0223:  BCF    03.5
+0224:  BSF    06.2
+....................    delay_us(500); 
+0225:  MOVLW  F9
+0226:  MOVWF  77
+0227:  DECFSZ 77,F
+0228:  GOTO   227
+0229:  GOTO   22A
+....................    output_low(BUZZER_PIN); 
+022A:  BSF    03.5
+022B:  BCF    06.2
+022C:  BCF    03.5
+022D:  BCF    06.2
+....................    delay_us(500); 
+022E:  MOVLW  F9
+022F:  MOVWF  77
+0230:  DECFSZ 77,F
+0231:  GOTO   230
+0232:  GOTO   233
+.................... } 
+0233:  BCF    0A.3
+0234:  BCF    0A.4
+0235:  GOTO   2A3 (RETURN)
+.................... void main() 
+.................... { 
+*
+024D:  CLRF   04
+024E:  BCF    03.7
+024F:  MOVLW  1F
+0250:  ANDWF  03,F
+0251:  BSF    03.5
+0252:  BSF    1F.0
+0253:  BSF    1F.1
+0254:  BSF    1F.2
+0255:  BCF    1F.3
+0256:  MOVLW  07
+0257:  MOVWF  1C
+....................    int velocity; 
+....................    init_adc(); 
+*
+025B:  GOTO   004
+....................  
+....................    setup_psp(PSP_DISABLED); 
+025C:  BSF    03.5
+025D:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED); 
+025E:  BCF    03.5
+025F:  BCF    14.5
+0260:  BCF    20.5
+0261:  MOVF   20,W
+0262:  BSF    03.5
+0263:  MOVWF  07
+0264:  BCF    03.5
+0265:  BSF    20.4
+0266:  MOVF   20,W
+0267:  BSF    03.5
+0268:  MOVWF  07
+0269:  BCF    03.5
+026A:  BCF    20.3
+026B:  MOVF   20,W
+026C:  BSF    03.5
+026D:  MOVWF  07
+026E:  MOVLW  01
+026F:  BCF    03.5
+0270:  MOVWF  14
+0271:  MOVLW  00
+0272:  BSF    03.5
+0273:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+0274:  MOVF   01,W
+0275:  ANDLW  C7
+0276:  IORLW  08
+0277:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+0278:  BCF    03.5
+0279:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+027A:  MOVLW  00
+027B:  MOVWF  78
+027C:  MOVWF  12
+027D:  MOVLW  00
+027E:  BSF    03.5
+027F:  MOVWF  12
+....................    setup_comparator(NC_NC_NC_NC); 
+0280:  MOVLW  07
+0281:  MOVWF  1C
+0282:  MOVF   05,W
+0283:  MOVWF  05
+0284:  MOVLW  04
+0285:  MOVWF  77
+0286:  DECFSZ 77,F
+0287:  GOTO   286
+0288:  GOTO   289
+0289:  MOVF   1C,W
+028A:  BCF    03.5
+028B:  BCF    0D.6
+....................    setup_vref(FALSE); 
+028C:  BSF    03.5
+028D:  CLRF   1D
+....................  
+....................    // TODO: USER CODE!! 
+....................    while(true){ 
+....................       velocity = read_velocity(); 
+028E:  BCF    03.5
+028F:  GOTO   01F
+0290:  MOVF   78,W
+0291:  MOVWF  21
+....................       if(velocity > 30 && (is_seatBelt_on(CINTO_MOTORISTA) != 0 || is_seatBelt_on(CINTO_PASSAGEIRO) != 0)){ 
+0292:  MOVF   21,W
+0293:  SUBLW  1E
+0294:  BTFSC  03.0
+0295:  GOTO   2A4
+0296:  MOVLW  30
+0297:  MOVWF  22
+0298:  CALL   20F
+0299:  MOVF   78,F
+029A:  BTFSS  03.2
+029B:  GOTO   2A2
+029C:  MOVLW  31
+029D:  MOVWF  22
+029E:  CALL   20F
+029F:  MOVF   78,F
+02A0:  BTFSC  03.2
+02A1:  GOTO   2A4
+....................          sound_buzzer(); 
+02A2:  GOTO   221
+....................       } else{ 
+02A3:  GOTO   2A8
+....................          output_low(BUZZER_PIN); 
+02A4:  BSF    03.5
+02A5:  BCF    06.2
+02A6:  BCF    03.5
+02A7:  BCF    06.2
+....................       } 
+....................        
+....................       delay_ms(10); 
+02A8:  MOVLW  0A
+02A9:  MOVWF  22
+02AA:  GOTO   236
+....................    } 
+02AB:  GOTO   28F
+....................  
+.................... } 
+02AC:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NODEBUG NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT

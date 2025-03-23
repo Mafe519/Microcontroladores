@@ -1,0 +1,48 @@
+
+ROM used: 187 (2%)
+          187 (2%) including unused fragments
+
+          0 Average locations per line
+          9 Average locations per statement
+
+RAM used: 14 (4%) at main() level
+          16 (4%) worst case
+
+Stack used: 2 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   57    21 100  mainTimer01.c
+  326     0   0  ..\..\Program Files (x86)\PICC\devices\16F877A.h
+----- -----
+  383    21 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20  11   1             @delay_ms1
+0     15   8   1    88  2.9  RTCC_isr
+0    105  56   1   388  2.8  MAIN
+
+Program metrics:
+    Functions               2
+    Statements              21
+    Comments                78
+    Volume (V)              552
+    Difficilty (D)          5.8
+    Effort to implement (E) 3212
+    Time to implement (T)   3 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    91
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0002E    43  0  
+0002F-007FF   140  1861  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

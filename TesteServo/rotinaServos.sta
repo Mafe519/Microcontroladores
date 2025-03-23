@@ -1,0 +1,56 @@
+
+ROM used: 553 (7%)
+          553 (7%) including unused fragments
+
+          1 Average locations per line
+          8 Average locations per statement
+
+RAM used: 26 (7%) at main() level
+          45 (12%) worst case
+
+Stack used: 3 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   85    43  61  rotinaServos.c
+  326     0   0  ..\..\Program Files (x86)\PICC\devices\16F877A.h
+  146    27  39  ..\..\Program Files (x86)\PICC\drivers\servo_st.c
+----- -----
+  557    70 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21   4   1             @delay_ms1
+0     69  12   0   391  4.2  timer_0
+0     14   3   0    78  1.6  servo_init
+0    127  23  14   156  5.1  map_int
+ Inline        5             @MUL1616
+ Inline        5             @DIV1616
+0     18   3   1    85  2.3  servo_1_write
+0     18   3   1    85  2.3  servo_2_write
+0     18   3   1    83  2.5  servo_3_write
+0    221  40   1  1144  2.9  MAIN
+
+Program metrics:
+    Functions               7
+    Statements              70
+    Comments                89
+    Volume (V)              2841
+    Difficilty (D)          21.2
+    Effort to implement (E) 60341
+    Time to implement (T)   56 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   4
+    Maintainability (MI)    68
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0002E    43  0  
+0002F-007FF   506  1495  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

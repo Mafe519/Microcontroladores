@@ -1,0 +1,26 @@
+[PROJECT]
+Target=C:\Micro\tarefaPWM.hex
+Development_Mode=
+Processor_Text=PIC16F877A
+ToolSuite=CCS
+Processor=0x877A
+[C:\Micro\tarefaPWM]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Micro\tarefaPWM.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Micro\tarefaPWM
+[Opened Files]
+1=tarefaPWM.c
+2=..\Users\ferna\Downloads\pwm_func.c
+3=..\Program Files (x86)\PICC\devices\16F877A.h
+4=

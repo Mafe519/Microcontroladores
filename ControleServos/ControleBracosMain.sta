@@ -1,0 +1,54 @@
+
+ROM used: 453 (6%)
+          453 (6%) including unused fragments
+
+          1 Average locations per line
+          7 Average locations per statement
+
+RAM used: 26 (7%) at main() level
+          46 (12%) worst case
+
+Stack used: 3 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  123    36  57  ControleBracosMain.c
+  326     0   0  ..\..\Program Files (x86)\PICC\devices\16F877A.h
+  147    27  43  ..\..\Program Files (x86)\PICC\drivers\servo_st.c
+----- -----
+  596    63 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     69  15   0   391  4.2  timer_0
+0    127  28  14   156  5.1  map_int
+ Inline        5             @MUL1616
+ Inline        5             @DIV1616
+0     18   4   1    85  2.3  servo_1_write
+0     18   4   1    85  2.3  servo_2_write
+0     18   4   1    83  2.5  servo_3_write
+0    156  34   1   977  6.3  MAIN
+
+Program metrics:
+    Functions               6
+    Statements              63
+    Comments                131
+    Volume (V)              2463
+    Difficilty (D)          22.6
+    Effort to implement (E) 55574
+    Time to implement (T)   51 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   11
+    Maintainability (MI)    142
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0002E    43  0  
+0002F-007FF   406  1595  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

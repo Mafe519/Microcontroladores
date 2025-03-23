@@ -1,0 +1,43 @@
+
+ROM used: 100 (5%)
+          100 (5%) including unused fragments
+
+          0 Average locations per line
+          9 Average locations per statement
+
+RAM used: 11 (5%) at main() level
+          12 (5%) worst case
+
+Stack used: 1 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   34    11 100  mainPWMWithDelay01.c
+  222     0   0  ..\..\Program Files (x86)\PICC\devices\16F628A.h
+----- -----
+  256    11 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     20  20   1             @delay_us1
+0     76  76   1   259  5.0  main
+
+Program metrics:
+    Functions               1
+    Statements              11
+    Comments                66
+    Volume (V)              262
+    Difficilty (D)          4.8
+    Effort to implement (E) 1259
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    104
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF    96  1948  
+
+
+

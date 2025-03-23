@@ -1,0 +1,341 @@
+CCS PCM C Compiler, Version 4.104, 5967               29-jul-24 21:50
+
+               Filename: C:\Micro\servoMaxMin\servoMaxMin.lst
+
+               ROM used: 201 words (2%)
+                         Largest free fragment is 2048
+               RAM used: 7 (2%) at main() level
+                         9 (2%) worst case
+               Stack:    2 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   06F
+0003:  NOP
+.................... //#include "C:\Micro\servoMaxMin\servoMaxMin.h" 
+....................  
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=6000000) 
+*
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  F1
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  NOP
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+0019:  MOVLW  0A
+001A:  SUBWF  23,F
+001B:  BTFSS  03.0
+001C:  GOTO   027
+001D:  MOVLW  23
+001E:  MOVWF  04
+001F:  BCF    03.7
+0020:  BCF    03.0
+0021:  RRF    00,F
+0022:  MOVF   00,W
+0023:  BTFSC  03.2
+0024:  GOTO   027
+0025:  DECFSZ 00,F
+0026:  GOTO   025
+0027:  RETURN
+....................  
+....................  
+.................... void Rotation0() //0 Degree 
+....................    { 
+....................    unsigned int i; 
+....................    for(i=0;i<50;i++) 
+0028:  CLRF   21
+0029:  MOVF   21,W
+002A:  SUBLW  31
+002B:  BTFSS  03.0
+002C:  GOTO   046
+....................       { 
+....................          output_high(PIN_D0); 
+002D:  BSF    03.5
+002E:  BCF    08.0
+002F:  BCF    03.5
+0030:  BSF    08.0
+....................          delay_us(500); // pulse of 800us 
+0031:  MOVLW  F9
+0032:  MOVWF  77
+0033:  DECFSZ 77,F
+0034:  GOTO   033
+0035:  GOTO   036
+....................          output_low(PIN_D0); 
+0036:  BSF    03.5
+0037:  BCF    08.0
+0038:  BCF    03.5
+0039:  BCF    08.0
+....................          delay_us(19500); 
+003A:  MOVLW  13
+003B:  MOVWF  22
+003C:  CALL   004
+003D:  MOVLW  02
+003E:  MOVWF  22
+003F:  MOVLW  F8
+0040:  MOVWF  23
+0041:  CALL   019
+0042:  DECFSZ 22,F
+0043:  GOTO   03F
+....................          } 
+0044:  INCF   21,F
+0045:  GOTO   029
+....................     } 
+0046:  BCF    0A.3
+0047:  BCF    0A.4
+0048:  GOTO   0B8 (RETURN)
+.................... void Rotation45() //44 Degree 
+....................    { 
+....................    unsigned int i; 
+....................    for(i=0;i<50;i++) 
+....................       { 
+....................          output_high(PIN_D0); 
+....................          delay_us(1150); // pulse of 800us        // 1400  - 180o 
+....................          output_low(PIN_D0);                      //   x      45o 
+....................          delay_us(18850); 
+....................          } 
+....................     } 
+.................... void Rotation75() //75o Degree 
+....................    { 
+....................    unsigned int i; 
+....................    for(i=0;i<50;i++) 
+....................       { 
+....................          output_high(PIN_D0); 
+....................          delay_us(1383); // pulse of 800us        // 1400  - 180o 
+....................          output_low(PIN_D0);                      //   x      75o 
+....................          delay_us(18617); 
+....................          } 
+....................     }     
+....................  
+.................... void Rotation90() //90 Degree 
+....................    {             
+....................    unsigned int i; 
+....................    for(i=0;i<50;i++) 
+....................       {                         //  180o   0o 
+....................          output_high(PIN_D0);    // 2200 - 800 = 1400     90o =  700 
+....................          delay_us(1500); // pulse of 1500us 
+....................          output_low(PIN_D0); 
+....................          delay_us(18500); 
+....................       } 
+....................    } 
+....................  
+.................... void Rotation180() //180 Degree 
+....................    { 
+....................    unsigned int i; 
+....................    for(i=0;i<50;i++) 
+0049:  CLRF   21
+004A:  MOVF   21,W
+004B:  SUBLW  31
+004C:  BTFSS  03.0
+004D:  GOTO   06C
+....................       { 
+....................          output_high(PIN_D0); 
+004E:  BSF    03.5
+004F:  BCF    08.0
+0050:  BCF    03.5
+0051:  BSF    08.0
+....................          delay_us(2500); // pulse of 2200us 
+0052:  MOVLW  02
+0053:  MOVWF  22
+0054:  CALL   004
+0055:  MOVLW  02
+0056:  MOVWF  22
+0057:  MOVLW  F8
+0058:  MOVWF  23
+0059:  CALL   019
+005A:  DECFSZ 22,F
+005B:  GOTO   057
+....................          output_low(PIN_D0); 
+005C:  BSF    03.5
+005D:  BCF    08.0
+005E:  BCF    03.5
+005F:  BCF    08.0
+....................          delay_us(17500); 
+0060:  MOVLW  11
+0061:  MOVWF  22
+0062:  CALL   004
+0063:  MOVLW  02
+0064:  MOVWF  22
+0065:  MOVLW  F8
+0066:  MOVWF  23
+0067:  CALL   019
+0068:  DECFSZ 22,F
+0069:  GOTO   065
+....................       } 
+006A:  INCF   21,F
+006B:  GOTO   04A
+....................    } 
+006C:  BCF    0A.3
+006D:  BCF    0A.4
+006E:  GOTO   0C0 (RETURN)
+....................     
+....................  
+.................... void R0() //90°- 
+....................    { 
+....................    unsigned int i; 
+....................    for(i=0;i<50;i++) 
+....................       { 
+....................          output_high(PIN_D0); 
+....................          delay_us(1000); // pulse of 2200us 
+....................          output_low(PIN_D0); 
+....................          delay_us(19000); 
+....................       } 
+....................    } 
+.................... void R180() //90°+ 
+....................    { 
+....................    unsigned int i; 
+....................    for(i=0;i<50;i++) 
+....................       { 
+....................          output_high(PIN_D0); 
+....................          delay_us(2000); // pulse of 2200us 
+....................          output_low(PIN_D0); 
+....................          delay_us(18000); 
+....................       } 
+....................    } 
+....................  
+.................... void main() 
+.................... { 
+006F:  CLRF   04
+0070:  BCF    03.7
+0071:  MOVLW  1F
+0072:  ANDWF  03,F
+0073:  BSF    03.5
+0074:  BSF    1F.0
+0075:  BSF    1F.1
+0076:  BSF    1F.2
+0077:  BCF    1F.3
+0078:  MOVLW  07
+0079:  MOVWF  1C
+....................  
+....................    setup_adc_ports(NO_ANALOGS); 
+*
+007D:  BSF    03.5
+007E:  BSF    1F.0
+007F:  BSF    1F.1
+0080:  BSF    1F.2
+0081:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0082:  BCF    03.5
+0083:  BCF    1F.0
+....................    setup_psp(PSP_DISABLED); 
+0084:  BSF    03.5
+0085:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED); 
+0086:  BCF    03.5
+0087:  BCF    14.5
+0088:  BCF    20.5
+0089:  MOVF   20,W
+008A:  BSF    03.5
+008B:  MOVWF  07
+008C:  BCF    03.5
+008D:  BSF    20.4
+008E:  MOVF   20,W
+008F:  BSF    03.5
+0090:  MOVWF  07
+0091:  BCF    03.5
+0092:  BCF    20.3
+0093:  MOVF   20,W
+0094:  BSF    03.5
+0095:  MOVWF  07
+0096:  MOVLW  01
+0097:  BCF    03.5
+0098:  MOVWF  14
+0099:  MOVLW  00
+009A:  BSF    03.5
+009B:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+009C:  MOVF   01,W
+009D:  ANDLW  C7
+009E:  IORLW  08
+009F:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+00A0:  BCF    03.5
+00A1:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+00A2:  MOVLW  00
+00A3:  MOVWF  78
+00A4:  MOVWF  12
+00A5:  MOVLW  00
+00A6:  BSF    03.5
+00A7:  MOVWF  12
+....................    setup_comparator(NC_NC_NC_NC); 
+00A8:  MOVLW  07
+00A9:  MOVWF  1C
+00AA:  MOVF   05,W
+00AB:  MOVWF  05
+00AC:  MOVLW  04
+00AD:  MOVWF  77
+00AE:  DECFSZ 77,F
+00AF:  GOTO   0AE
+00B0:  GOTO   0B1
+00B1:  MOVF   1C,W
+00B2:  BCF    03.5
+00B3:  BCF    0D.6
+....................    setup_vref(FALSE); 
+00B4:  BSF    03.5
+00B5:  CLRF   1D
+....................  
+....................    while(true){ 
+....................      // R0(); 
+....................       Rotation0();   // 0 graus 
+00B6:  BCF    03.5
+00B7:  GOTO   028
+....................       delay_ms(4000); 
+00B8:  MOVLW  10
+00B9:  MOVWF  21
+00BA:  MOVLW  FA
+00BB:  MOVWF  22
+00BC:  CALL   004
+00BD:  DECFSZ 21,F
+00BE:  GOTO   0BA
+....................       Rotation180(); // 180 graus 
+00BF:  GOTO   049
+....................      // R180(); 
+....................       delay_ms(4000); 
+00C0:  MOVLW  10
+00C1:  MOVWF  21
+00C2:  MOVLW  FA
+00C3:  MOVWF  22
+00C4:  CALL   004
+00C5:  DECFSZ 21,F
+00C6:  GOTO   0C2
+....................    } 
+00C7:  GOTO   0B7
+.................... } 
+00C8:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NODEBUG NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT

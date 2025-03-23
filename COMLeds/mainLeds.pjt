@@ -1,0 +1,27 @@
+[PROJECT]
+Target=C:\Micro\COMLeds\mainLeds.hex
+Development_Mode=
+Processor_Text=PIC16F877A
+ToolSuite=CCS
+Processor=0x877A
+[C:\Micro\COMLeds\mainLeds]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Micro\COMLeds\mainLeds.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Micro\COMLeds\mainLeds
+[Opened Files]
+1=mainLeds.c
+2=
+3=
+4=..\semaforo\semaforo.c
+5=

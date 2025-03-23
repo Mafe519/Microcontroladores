@@ -1,0 +1,78 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020     @TRIS_C
+021-022 main.anguloMedia
+023-024 main.adc_valor
+025     main.i
+026-027 main.pulse_width
+028-02B @MULFF.P1
+028-029 @ITOF.P2
+028-02B @SFTOI.P3
+028     main.@SCRATCH1
+029     main.@SCRATCH2
+02A     main.@SCRATCH3
+02B     @delay_us1.P1
+02C-02F @MULFF.P1
+030     @MULFF.@SCRATCH1
+031     @MULFF.@SCRATCH2
+032     @MULFF.@SCRATCH3
+033     @MULFF.@SCRATCH4
+034     @MULFF.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+00BB  @delay_us1
+00CA  main
+0004  @ITOF
+0023  @MULFF
+009A  @SFTOI
+00CA  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Micro\servoMirror\
+
+Project Files:
+    ServoMirrorMain.c
+    ..\..\Program Files (x86)\PICC\devices\16F877A.h
+
+Units:
+    C:\Micro\servoMirror\ServoMirrorMain (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      ServoMirrorMain.err
+    Ext Symbols: ServoMirrorMain.esym
+    INHX8:       ServoMirrorMain.hex
+    Symbols:     ServoMirrorMain.sym
+    List:        ServoMirrorMain.lst
+    Debug/COFF:  ServoMirrorMain.cof
+    Project:     ServoMirrorMain.PJT
+    Call Tree:   ServoMirrorMain.tre
+    Statistics:  ServoMirrorMain.sta

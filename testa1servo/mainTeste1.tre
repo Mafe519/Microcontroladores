@@ -1,0 +1,25 @@
+ÀÄmainTeste1
+   ÃÄMAIN  0/121  Ram=1
+   ³  ÃÄ??0??
+   ³  ÃÄservo_init  0/14  Ram=0
+   ³  ÃÄservo_1_write  0/143  Ram=1
+   ³  ³  ÀÄmap_int  (Inline)  Ram=14
+   ³  ³     ÃÄ@MUL1616  (Inline)  Ram=5
+   ³  ³     ÀÄ@DIV1616  (Inline)  Ram=5
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄservo_1_write  0/143  Ram=1
+   ³  ³  ÀÄmap_int  (Inline)  Ram=14
+   ³  ³     ÃÄ@MUL1616  (Inline)  Ram=5
+   ³  ³     ÀÄ@DIV1616  (Inline)  Ram=5
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄservo_1_write  0/143  Ram=1
+   ³  ³  ÀÄmap_int  (Inline)  Ram=14
+   ³  ³     ÃÄ@MUL1616  (Inline)  Ram=5
+   ³  ³     ÀÄ@DIV1616  (Inline)  Ram=5
+   ³  ÃÄ@delay_ms1  0/21  Ram=1
+   ³  ÃÄservo_1_write  0/143  Ram=1
+   ³  ³  ÀÄmap_int  (Inline)  Ram=14
+   ³  ³     ÃÄ@MUL1616  (Inline)  Ram=5
+   ³  ³     ÀÄ@DIV1616  (Inline)  Ram=5
+   ³  ÀÄ@delay_ms1  0/21  Ram=1
+   ÀÄtimer_0  0/37  Ram=0

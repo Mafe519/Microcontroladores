@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento de Temperatura e Porta</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .icon-box {
+            text-align: center;
+        }
+        .icon-box i {
+            font-size: 50px;
+        }
+        .chart-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .chart {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">Monitoramento de Temperatura e Porta</h1>
+
+    <!-- Contêiner para ícones e dados em tempo real -->
+    <div class="container">
+        <!-- Ícone de Temperatura -->
+        <div class="icon-box">
+            <i class="fas fa-thermometer-half"></i>
+            <p>Temperatura Atual: <span id="temperature">--</span>°C</p>
+        </div>
+
+        <!-- Ícone de Estado da Porta -->
+        <div class="icon-box">
+            <i class="fas fa-door-open"></i>
+            <p>Estado da Porta: <span id="door-status">--</span></p>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="chart-container">
+        <!-- Gráfico da Média de Temperatura -->
+        <canvas id="temperatureChart" class="chart"></canvas>
+
+        <!-- Gráfico da Média de Abertura da Porta -->
+        <canvas id="doorChart" class="chart"></canvas>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script>
+        // Configuração Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBz6ipvQz3jOxOcaOWjyeRV327xvX7JgN4",
+            authDomain: "sensorfirebase-dd9ec.firebaseapp.com",
+            databaseURL: "https://sensorfirebase-dd9ec-default-rtdb.firebaseio.com",
+            projectId: "sensorfirebase-dd9ec",
+            storageBucket: "sensorfirebase-dd9ec.appspot.com",
+            messagingSenderId: "24039269341",
+            appId: "1:24039269341:web:4723bda14492ea2bf64c34"
+        };
+
+        // Inicializa Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Referências do Firebase
+        const tempRef = firebase.database().ref('Dados/Temperatura');
+        const doorRef = firebase.database().ref('Dados/EstadoPorta');
+        const openCountRef = firebase.database().ref('Dados/OpenCount');
+
+        // Variáveis de Acúmulo para Médias
+        let tempTotal = 0, tempCount = 0, openTotal = 0;
+
+        // Elementos DOM
+        const tempElem = document.getElementById('temperature');
+        const doorElem = document.getElementById('door-status');
+
+        // Gráfico da Temperatura
+        const temperatureChart = new Chart(document.getElementById('temperatureChart'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Média de Temperatura (°C)',
+                    data: [],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: { display: true, title: { display: true, text: 'Tempo (s)' } },
+                    y: { display: true, title: { display: true, text: 'Temperatura (°C)' } }
+                }
+            }
+        });
+
+        // Gráfico da Abertura de Porta
+        const doorChart = new Chart(document.getElementById('doorChart'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Média de Abertura da Porta',
+                    data: [],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: { display: true, title: { display: true, text: 'Tempo (s)' } },
+                    y: { display: true, title: { display: true, text: 'Número de Aberturas' } }
+                }
+            }
+        });
+
+        // Função para atualizar os gráficos
+        function updateCharts(temp, openCount) {
+            // Atualiza médias de temperatura e porta
+            tempTotal += temp;
+            tempCount++;
+
+            const avgTemp = (tempTotal / tempCount).toFixed(2);
+            const avgOpen = (openTotal / tempCount).toFixed(2);
+
+            // Atualiza os gráficos
+            temperatureChart.data.labels.push(tempCount);
+            temperatureChart.data.datasets[0].data.push(avgTemp);
+
+            doorChart.data.labels.push(tempCount);
+            doorChart.data.datasets[0].data.push(avgOpen);
+
+            if (temperatureChart.data.labels.length > 20) {
+                temperatureChart.data.labels.shift();
+                temperatureChart.data.datasets[0].data.shift();
+            }
+
+            if (doorChart.data.labels.length > 20) {
+                doorChart.data.labels.shift();
+                doorChart.data.datasets[0].data.shift();
+            }
+
+            temperatureChart.update();
+            doorChart.update();
+        }
+
+        // Função para escutar Firebase em tempo real
+        tempRef.on('value', (snapshot) => {
+            const temp = snapshot.val();
+            tempElem.textContent = temp ? temp.toFixed(1) : '--';
+            updateCharts(temp, openTotal);  // Atualiza os gráficos
+        });
+
+        doorRef.on('value', (snapshot) => {
+            const doorStatus = snapshot.val();
+            doorElem.textContent = doorStatus || '--';
+        });
+
+        openCountRef.on('value', (snapshot) => {
+            const openCount = snapshot.val();
+            openTotal = openCount || 0;
+            updateCharts(parseFloat(tempElem.textContent), openTotal);
+        });
+
+    </script>
+</body>
+</html>

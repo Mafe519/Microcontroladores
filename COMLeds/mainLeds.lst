@@ -1,0 +1,241 @@
+CCS PCM C Compiler, Version 4.104, 5967               23-jul-24 15:44
+
+               Filename: C:\Micro\COMLeds\mainLeds.lst
+
+               ROM used: 153 words (2%)
+                         Largest free fragment is 2048
+               RAM used: 7 (2%) at main() level
+                         8 (2%) worst case
+               Stack:    0 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... //#include "C:\Micro\COMLeds\mainLeds.h" 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=6000000) 
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8) 
+....................  
+.................... #define led1 PIN_D0 
+.................... #define led2 PIN_D1 
+.................... #define led3 PIN_D2 
+.................... #define led4 PIN_D7 
+.................... #define led5 PIN_D6 
+....................  
+.................... void main() 
+.................... { 
+*
+0004:  CLRF   04
+0005:  BCF    03.7
+0006:  MOVLW  1F
+0007:  ANDWF  03,F
+0008:  MOVLW  26
+0009:  BSF    03.5
+000A:  MOVWF  19
+000B:  MOVLW  A6
+000C:  MOVWF  18
+000D:  MOVLW  90
+000E:  BCF    03.5
+000F:  MOVWF  18
+0010:  BSF    03.5
+0011:  BSF    1F.0
+0012:  BSF    1F.1
+0013:  BSF    1F.2
+0014:  BCF    1F.3
+0015:  MOVLW  07
+0016:  MOVWF  1C
+....................  
+....................    setup_adc_ports(NO_ANALOGS); 
+*
+001A:  BSF    03.5
+001B:  BSF    1F.0
+001C:  BSF    1F.1
+001D:  BSF    1F.2
+001E:  BCF    1F.3
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+001F:  BCF    1F.6
+0020:  BCF    03.5
+0021:  BCF    1F.6
+0022:  BCF    1F.7
+0023:  BSF    03.5
+0024:  BCF    1F.7
+0025:  BCF    03.5
+0026:  BSF    1F.0
+....................    setup_psp(PSP_DISABLED); 
+0027:  BSF    03.5
+0028:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED); 
+0029:  BCF    03.5
+002A:  BCF    14.5
+002B:  BCF    20.5
+002C:  MOVF   20,W
+002D:  BSF    03.5
+002E:  MOVWF  07
+002F:  BCF    03.5
+0030:  BSF    20.4
+0031:  MOVF   20,W
+0032:  BSF    03.5
+0033:  MOVWF  07
+0034:  BCF    03.5
+0035:  BCF    20.3
+0036:  MOVF   20,W
+0037:  BSF    03.5
+0038:  MOVWF  07
+0039:  MOVLW  01
+003A:  BCF    03.5
+003B:  MOVWF  14
+003C:  MOVLW  00
+003D:  BSF    03.5
+003E:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+003F:  MOVF   01,W
+0040:  ANDLW  C7
+0041:  IORLW  08
+0042:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+0043:  BCF    03.5
+0044:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0045:  MOVLW  00
+0046:  MOVWF  78
+0047:  MOVWF  12
+0048:  MOVLW  00
+0049:  BSF    03.5
+004A:  MOVWF  12
+....................    setup_comparator(NC_NC_NC_NC); 
+004B:  MOVLW  07
+004C:  MOVWF  1C
+004D:  MOVF   05,W
+004E:  MOVWF  05
+004F:  MOVLW  04
+0050:  MOVWF  77
+0051:  DECFSZ 77,F
+0052:  GOTO   051
+0053:  GOTO   054
+0054:  MOVF   1C,W
+0055:  BCF    03.5
+0056:  BCF    0D.6
+....................    setup_vref(FALSE); 
+0057:  BSF    03.5
+0058:  CLRF   1D
+....................  
+....................    // TODO: USER CODE!! 
+....................    int dado = 0; 
+0059:  BCF    03.5
+005A:  CLRF   21
+....................     
+....................    while(true){ 
+....................       if(kbhit() > 0){ 
+005B:  MOVLW  00
+005C:  BTFSC  0C.5
+005D:  MOVLW  01
+005E:  XORLW  00
+005F:  BTFSC  03.2
+0060:  GOTO   097
+....................          dado = getchar(); 
+0061:  BTFSS  0C.5
+0062:  GOTO   061
+0063:  MOVF   1A,W
+0064:  MOVWF  21
+....................          
+....................       switch (dado) { 
+0065:  MOVF   21,W
+0066:  XORLW  4C
+0067:  BTFSC  03.2
+0068:  GOTO   076
+0069:  XORLW  1E
+006A:  BTFSC  03.2
+006B:  GOTO   07F
+006C:  XORLW  07
+006D:  BTFSC  03.2
+006E:  GOTO   088
+006F:  XORLW  11
+0070:  BTFSC  03.2
+0071:  GOTO   08D
+0072:  XORLW  0D
+0073:  BTFSC  03.2
+0074:  GOTO   092
+0075:  GOTO   097
+....................          case 'L': 
+....................             putc(dado);  
+0076:  MOVF   21,W
+0077:  BTFSS  0C.4
+0078:  GOTO   077
+0079:  MOVWF  19
+....................             output_high(led1); 
+007A:  BSF    03.5
+007B:  BCF    08.0
+007C:  BCF    03.5
+007D:  BSF    08.0
+....................             break;  // Mover servo 1 para a esquerda 
+007E:  GOTO   097
+....................          case 'R':  
+....................             putc(dado);  
+007F:  MOVF   21,W
+0080:  BTFSS  0C.4
+0081:  GOTO   080
+0082:  MOVWF  19
+....................             output_low(led1);  
+0083:  BSF    03.5
+0084:  BCF    08.0
+0085:  BCF    03.5
+0086:  BCF    08.0
+....................             break;  // Mover servo 1 para a direita 
+0087:  GOTO   097
+....................          case 'U': 
+....................             output_high(led2);  
+0088:  BSF    03.5
+0089:  BCF    08.1
+008A:  BCF    03.5
+008B:  BSF    08.1
+....................             break;  // Mover servo 2 para a esquerda 
+008C:  GOTO   097
+....................          case 'D': 
+....................             output_low(led2);  
+008D:  BSF    03.5
+008E:  BCF    08.1
+008F:  BCF    03.5
+0090:  BCF    08.1
+....................             break;  // Mover servo 2 para a direita 
+0091:  GOTO   097
+....................          case 'I':    
+....................             output_high(led3);  
+0092:  BSF    03.5
+0093:  BCF    08.2
+0094:  BCF    03.5
+0095:  BSF    08.2
+....................             break;  // Mover servo 3 para a esquerda 
+0096:  GOTO   097
+....................         // case 'O':  
+....................           //  servo_3_write(180);  
+....................             //break;  // Mover servo 3 para a direita 
+....................           
+....................       } 
+....................       } 
+....................    } 
+0097:  GOTO   05B
+....................  
+.................... } 
+0098:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NODEBUG NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT

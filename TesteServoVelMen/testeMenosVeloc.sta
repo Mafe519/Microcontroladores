@@ -1,0 +1,57 @@
+
+ROM used: 681 (8%)
+          681 (8%) including unused fragments
+
+          1 Average locations per line
+          7 Average locations per statement
+
+RAM used: 26 (7%) at main() level
+          50 (14%) worst case
+
+Stack used: 4 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  103    67  71  testeMenosVeloc.c
+  326     0   0  ..\..\Program Files (x86)\PICC\devices\16F877A.h
+  146    27  29  ..\..\Program Files (x86)\PICC\drivers\servo_st.c
+----- -----
+  575    94 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21   3   1             @delay_ms1
+0     69  10   0   391  4.2  timer_0
+0     14   2   0    78  1.6  servo_init
+0    127  19  14   156  5.1  map_int
+ Inline        5             @MUL1616
+ Inline        5             @DIV1616
+0     18   3   1    85  2.3  servo_1_write
+0     18   3   1    85  2.3  servo_2_write
+0     18   3   1    83  2.5  servo_3_write
+0     70  10   5   726  7.3  move_servo_gradual
+0    279  41   1  1631  2.9  MAIN
+
+Program metrics:
+    Functions               8
+    Statements              94
+    Comments                95
+    Volume (V)              4533
+    Difficilty (D)          28.7
+    Effort to implement (E) 129919
+    Time to implement (T)   2 hours, 0 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   13
+    Maintainability (MI)    57
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-0002E    43  0  
+0002F-007FF   634  1367  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

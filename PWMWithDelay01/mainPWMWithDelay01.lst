@@ -1,0 +1,151 @@
+CCS PCM C Compiler, Version 4.104, 5967               01-ago-24 09:24
+
+               Filename: C:\Micro\PWMWithDelay01\mainPWMWithDelay01.lst
+
+               ROM used: 100 words (5%)
+                         Largest free fragment is 1948
+               RAM used: 11 (5%) at main() level
+                         12 (5%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   018
+0003:  NOP
+.................... //#include "C:\Micro\PWMWithDelay01\mainPWMWithDelay01.h" 
+.................... #include <16F628A.h> 
+.................... //////// Standard Header file for the PIC16F628A device //////////////// 
+.................... #device PIC16F628A 
+.................... #list 
+....................  
+....................  
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection                    //Program memory not write protected 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=4000000) 
+0004:  MOVLW  12
+0005:  SUBWF  26,F
+0006:  BTFSS  03.0
+0007:  GOTO   017
+0008:  MOVLW  26
+0009:  MOVWF  04
+000A:  BCF    03.7
+000B:  MOVLW  FC
+000C:  ANDWF  00,F
+000D:  BCF    03.0
+000E:  RRF    00,F
+000F:  RRF    00,F
+0010:  MOVF   00,W
+0011:  BTFSC  03.2
+0012:  GOTO   017
+0013:  GOTO   015
+0014:  NOP
+0015:  DECFSZ 00,F
+0016:  GOTO   014
+0017:  RETURN
+.................... int16 ton, toff; 
+.................... unsigned int count=0; 
+....................  
+.................... void main() 
+.................... { 
+0018:  CLRF   04
+0019:  BCF    03.7
+001A:  MOVLW  1F
+001B:  ANDWF  03,F
+001C:  CLRF   24
+001D:  MOVLW  07
+001E:  MOVWF  1F
+....................  
+....................    // TODO: USER CODE!! 
+....................    if(++ton >= 1000)ton=0; 
+001F:  INCF   20,F
+0020:  BTFSC  03.2
+0021:  INCF   21,F
+0022:  MOVF   21,W
+0023:  SUBLW  02
+0024:  BTFSC  03.0
+0025:  GOTO   02F
+0026:  XORLW  FF
+0027:  BTFSS  03.2
+0028:  GOTO   02D
+0029:  MOVF   20,W
+002A:  SUBLW  E7
+002B:  BTFSC  03.0
+002C:  GOTO   02F
+002D:  CLRF   21
+002E:  CLRF   20
+....................    toff = 1000 - ton; 
+002F:  MOVF   20,W
+0030:  SUBLW  E8
+0031:  MOVWF  22
+0032:  MOVLW  03
+0033:  MOVWF  23
+0034:  MOVF   21,W
+0035:  BTFSS  03.0
+0036:  INCFSZ 21,W
+0037:  SUBWF  23,F
+....................    while(true){ 
+....................       for(count=1;count <= 10; count++){ 
+0038:  MOVLW  01
+0039:  MOVWF  24
+003A:  MOVF   24,W
+003B:  SUBLW  0A
+003C:  BTFSS  03.0
+003D:  GOTO   062
+....................          output_high(PIN_A0); 
+003E:  BSF    03.5
+003F:  BCF    05.0
+0040:  BCF    03.5
+0041:  BSF    05.0
+....................          delay_us(ton); 
+0042:  MOVF   21,W
+0043:  MOVWF  25
+0044:  INCF   25,F
+0045:  DECF   25,F
+0046:  BTFSC  03.2
+0047:  GOTO   04C
+0048:  MOVLW  FF
+0049:  MOVWF  26
+004A:  CALL   004
+004B:  GOTO   045
+004C:  MOVF   20,W
+004D:  MOVWF  26
+004E:  CALL   004
+....................          output_low(PIN_A0); 
+004F:  BSF    03.5
+0050:  BCF    05.0
+0051:  BCF    03.5
+0052:  BCF    05.0
+....................          delay_us(toff); 
+0053:  MOVF   23,W
+0054:  MOVWF  25
+0055:  INCF   25,F
+0056:  DECF   25,F
+0057:  BTFSC  03.2
+0058:  GOTO   05D
+0059:  MOVLW  FF
+005A:  MOVWF  26
+005B:  CALL   004
+005C:  GOTO   056
+005D:  MOVF   22,W
+005E:  MOVWF  26
+005F:  CALL   004
+....................       } 
+0060:  INCF   24,F
+0061:  GOTO   03A
+....................    } 
+0062:  GOTO   038
+....................  
+.................... } 
+0063:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F2A   HS NOWDT NOPUT NOPROTECT NOBROWNOUT MCLR NOLVP NOCPD

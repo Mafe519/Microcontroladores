@@ -1,0 +1,100 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     @TRIS_C
+021     MAIN.velocity
+022     is_seatBelt_on.pin
+022     @delay_ms1.P1
+022     read_velocity.adc_value
+022     MAIN.@SCRATCH1
+023     @WRITEBITA.P1
+023     @READBITA.P2
+023-026 read_velocity.velocity
+024     @WRITEBITA.P1
+024-025 @READBITA.P2
+025-026 @WRITEBITA.P1
+027-02A @SFTOI.P1
+027     read_velocity.@SCRATCH1
+028-02B @DIVFF.P1
+028-029 @ITOF.P2
+028     read_velocity.@SCRATCH2
+029     read_velocity.@SCRATCH3
+02A     read_velocity.@SCRATCH4
+02B-02E @MULFF.P1
+02C-02F @DIVFF.P1
+02F-032 @MULFF.P1
+030     @DIVFF.@SCRATCH1
+031     @DIVFF.@SCRATCH2
+032     @DIVFF.@SCRATCH3
+033     @DIVFF.@SCRATCH4
+033     @MULFF.@SCRATCH1
+034     @DIVFF.@SCRATCH5
+034     @MULFF.@SCRATCH2
+035     @DIVFF.@SCRATCH6
+035     @MULFF.@SCRATCH3
+036     @MULFF.@SCRATCH4
+037     @MULFF.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0236  @delay_ms1
+0004  init_adc
+0025  @ITOF
+004F  @DIVFF
+012E  @MULFF
+001F  read_velocity
+01B2  @SFTOI
+020F  is_seatBelt_on
+01D4  @WRITEBITA
+01F6  @READBITA
+0221  sound_buzzer
+024D  MAIN
+024D  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Micro\Miniteste\
+
+Project Files:
+    mainMiniTeste.c
+    ..\..\Program Files (x86)\PICC\devices\16F877A.h
+
+Units:
+    C:\Micro\Miniteste\mainMiniTeste (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      mainMiniTeste.err
+    Ext Symbols: mainMiniTeste.esym
+    INHX8:       mainMiniTeste.hex
+    Symbols:     mainMiniTeste.sym
+    List:        mainMiniTeste.lst
+    Debug/COFF:  mainMiniTeste.cof
+    Project:     mainMiniTeste.PJT
+    Call Tree:   mainMiniTeste.tre
+    Statistics:  mainMiniTeste.sta

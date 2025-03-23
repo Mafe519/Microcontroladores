@@ -1,0 +1,17 @@
+ÀÄmainMiniTeste
+   ÀÄMAIN  0/96  Ram=2
+      ÃÄ??0??
+      ÃÄinit_adc  0/27  Ram=0
+      ÃÄread_velocity  0/437  Ram=9
+      ³  ÃÄ@ITOF  (Inline)  Ram=2
+      ³  ÃÄ@DIVFF  (Inline)  Ram=14
+      ³  ÃÄ@MULFF  (Inline)  Ram=13
+      ³  ÀÄ@SFTOI  (Inline)  Ram=4
+      ÃÄis_seatBelt_on  0/18  Ram=1
+      ³  ÃÄ@WRITEBITA  0/34  Ram=6
+      ³  ÀÄ@READBITA  0/25  Ram=5
+      ÃÄis_seatBelt_on  0/18  Ram=1
+      ³  ÃÄ@WRITEBITA  0/34  Ram=6
+      ³  ÀÄ@READBITA  0/25  Ram=5
+      ÃÄsound_buzzer  0/21  Ram=0
+      ÀÄ@delay_ms1  0/23  Ram=1

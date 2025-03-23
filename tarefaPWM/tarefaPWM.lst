@@ -1,0 +1,528 @@
+CCS PCM C Compiler, Version 4.104, 5967               22-fev-24 16:43
+
+               Filename: C:\Micro\tarefaPWM.lst
+
+               ROM used: 442 words (5%)
+                         Largest free fragment is 2048
+               RAM used: 171 (46%) at main() level
+                         171 (46%) worst case
+               Stack:    0 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... //#include "C:\Micro\tarefaPWM.h" 
+....................  
+....................  
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=6000000) 
+....................  
+.................... unsigned int8 ton[81]={ 
+....................      127,  132,  137,  142,  147,  152,  157,  162,  167, 
+....................      171,  176,  181,  185,  190,  194,  198,  202,  206, 
+....................      210,  214,  218,  221,  224,  228,  231,  233,  236, 
+....................      239,  241,  243,  245,  247,  249,  250,  251,  253,   
+....................      253,  254,  255,  255,  255,  254,  254,  253,  252, 
+....................      252,  250,  249,  248,  246,  244,  242,  240,  238,   
+....................      235,  233,  230,  227,  224,  220,  217,  213,  209, 
+....................      206,  202,  198,  193,  189,  185,  180,  176,  171, 
+....................      166,  161,  157,  152,  147,  142,  137,  132,  127}; 
+*
+000F:  MOVLW  7F
+0010:  BCF    03.5
+0011:  MOVWF  20
+0012:  MOVLW  84
+0013:  MOVWF  21
+0014:  MOVLW  89
+0015:  MOVWF  22
+0016:  MOVLW  8E
+0017:  MOVWF  23
+0018:  MOVLW  93
+0019:  MOVWF  24
+001A:  MOVLW  98
+001B:  MOVWF  25
+001C:  MOVLW  9D
+001D:  MOVWF  26
+001E:  MOVLW  A2
+001F:  MOVWF  27
+0020:  MOVLW  A7
+0021:  MOVWF  28
+0022:  MOVLW  AB
+0023:  MOVWF  29
+0024:  MOVLW  B0
+0025:  MOVWF  2A
+0026:  MOVLW  B5
+0027:  MOVWF  2B
+0028:  MOVLW  B9
+0029:  MOVWF  2C
+002A:  MOVLW  BE
+002B:  MOVWF  2D
+002C:  MOVLW  C2
+002D:  MOVWF  2E
+002E:  MOVLW  C6
+002F:  MOVWF  2F
+0030:  MOVLW  CA
+0031:  MOVWF  30
+0032:  MOVLW  CE
+0033:  MOVWF  31
+0034:  MOVLW  D2
+0035:  MOVWF  32
+0036:  MOVLW  D6
+0037:  MOVWF  33
+0038:  MOVLW  DA
+0039:  MOVWF  34
+003A:  MOVLW  DD
+003B:  MOVWF  35
+003C:  MOVLW  E0
+003D:  MOVWF  36
+003E:  MOVLW  E4
+003F:  MOVWF  37
+0040:  MOVLW  E7
+0041:  MOVWF  38
+0042:  MOVLW  E9
+0043:  MOVWF  39
+0044:  MOVLW  EC
+0045:  MOVWF  3A
+0046:  MOVLW  EF
+0047:  MOVWF  3B
+0048:  MOVLW  F1
+0049:  MOVWF  3C
+004A:  MOVLW  F3
+004B:  MOVWF  3D
+004C:  MOVLW  F5
+004D:  MOVWF  3E
+004E:  MOVLW  F7
+004F:  MOVWF  3F
+0050:  MOVLW  F9
+0051:  MOVWF  40
+0052:  MOVLW  FA
+0053:  MOVWF  41
+0054:  MOVLW  FB
+0055:  MOVWF  42
+0056:  MOVLW  FD
+0057:  MOVWF  43
+0058:  MOVWF  44
+0059:  MOVLW  FE
+005A:  MOVWF  45
+005B:  MOVLW  FF
+005C:  MOVWF  46
+005D:  MOVWF  47
+005E:  MOVWF  48
+005F:  MOVLW  FE
+0060:  MOVWF  49
+0061:  MOVWF  4A
+0062:  MOVLW  FD
+0063:  MOVWF  4B
+0064:  MOVLW  FC
+0065:  MOVWF  4C
+0066:  MOVWF  4D
+0067:  MOVLW  FA
+0068:  MOVWF  4E
+0069:  MOVLW  F9
+006A:  MOVWF  4F
+006B:  MOVLW  F8
+006C:  MOVWF  50
+006D:  MOVLW  F6
+006E:  MOVWF  51
+006F:  MOVLW  F4
+0070:  MOVWF  52
+0071:  MOVLW  F2
+0072:  MOVWF  53
+0073:  MOVLW  F0
+0074:  MOVWF  54
+0075:  MOVLW  EE
+0076:  MOVWF  55
+0077:  MOVLW  EB
+0078:  MOVWF  56
+0079:  MOVLW  E9
+007A:  MOVWF  57
+007B:  MOVLW  E6
+007C:  MOVWF  58
+007D:  MOVLW  E3
+007E:  MOVWF  59
+007F:  MOVLW  E0
+0080:  MOVWF  5A
+0081:  MOVLW  DC
+0082:  MOVWF  5B
+0083:  MOVLW  D9
+0084:  MOVWF  5C
+0085:  MOVLW  D5
+0086:  MOVWF  5D
+0087:  MOVLW  D1
+0088:  MOVWF  5E
+0089:  MOVLW  CE
+008A:  MOVWF  5F
+008B:  MOVLW  CA
+008C:  MOVWF  60
+008D:  MOVLW  C6
+008E:  MOVWF  61
+008F:  MOVLW  C1
+0090:  MOVWF  62
+0091:  MOVLW  BD
+0092:  MOVWF  63
+0093:  MOVLW  B9
+0094:  MOVWF  64
+0095:  MOVLW  B4
+0096:  MOVWF  65
+0097:  MOVLW  B0
+0098:  MOVWF  66
+0099:  MOVLW  AB
+009A:  MOVWF  67
+009B:  MOVLW  A6
+009C:  MOVWF  68
+009D:  MOVLW  A1
+009E:  MOVWF  69
+009F:  MOVLW  9D
+00A0:  MOVWF  6A
+00A1:  MOVLW  98
+00A2:  MOVWF  6B
+00A3:  MOVLW  93
+00A4:  MOVWF  6C
+00A5:  MOVLW  8E
+00A6:  MOVWF  6D
+00A7:  MOVLW  89
+00A8:  MOVWF  6E
+00A9:  MOVLW  84
+00AA:  MOVWF  6F
+00AB:  MOVLW  7F
+00AC:  MOVWF  70
+....................  
+.................... unsigned int8 ton2[80]={ 
+....................      127, 122,  117,  112,  107,  102,  97,  93,  88,  83,  78,  74, 
+....................      69,  65,  61,  56,  52, 48,   45,  41,  37,  34,  30,  27, 
+....................      24,  21,  19,  16,  14, 12,   10,  8,   6,   5,   4,   2, 
+....................      2,   1,   0,   0,   0,   0,   1,   2,   2,   4,   5,   6, 
+....................      8,   10,  12,  14,  16,  19,  21,  24,  27,  30,  34,  37, 
+....................      41,  45,  48,  52,  56,  61,  65,  69,  74,  78,  83,  88, 
+....................      93,  97,  102, 107, 112, 117, 122,   127 }; 
+00AD:  BSF    03.5
+00AE:  MOVWF  20
+00AF:  MOVLW  7A
+00B0:  MOVWF  21
+00B1:  MOVLW  75
+00B2:  MOVWF  22
+00B3:  MOVLW  70
+00B4:  MOVWF  23
+00B5:  MOVLW  6B
+00B6:  MOVWF  24
+00B7:  MOVLW  66
+00B8:  MOVWF  25
+00B9:  MOVLW  61
+00BA:  MOVWF  26
+00BB:  MOVLW  5D
+00BC:  MOVWF  27
+00BD:  MOVLW  58
+00BE:  MOVWF  28
+00BF:  MOVLW  53
+00C0:  MOVWF  29
+00C1:  MOVLW  4E
+00C2:  MOVWF  2A
+00C3:  MOVLW  4A
+00C4:  MOVWF  2B
+00C5:  MOVLW  45
+00C6:  MOVWF  2C
+00C7:  MOVLW  41
+00C8:  MOVWF  2D
+00C9:  MOVLW  3D
+00CA:  MOVWF  2E
+00CB:  MOVLW  38
+00CC:  MOVWF  2F
+00CD:  MOVLW  34
+00CE:  MOVWF  30
+00CF:  MOVLW  30
+00D0:  MOVWF  31
+00D1:  MOVLW  2D
+00D2:  MOVWF  32
+00D3:  MOVLW  29
+00D4:  MOVWF  33
+00D5:  MOVLW  25
+00D6:  MOVWF  34
+00D7:  MOVLW  22
+00D8:  MOVWF  35
+00D9:  MOVLW  1E
+00DA:  MOVWF  36
+00DB:  MOVLW  1B
+00DC:  MOVWF  37
+00DD:  MOVLW  18
+00DE:  MOVWF  38
+00DF:  MOVLW  15
+00E0:  MOVWF  39
+00E1:  MOVLW  13
+00E2:  MOVWF  3A
+00E3:  MOVLW  10
+00E4:  MOVWF  3B
+00E5:  MOVLW  0E
+00E6:  MOVWF  3C
+00E7:  MOVLW  0C
+00E8:  MOVWF  3D
+00E9:  MOVLW  0A
+00EA:  MOVWF  3E
+00EB:  MOVLW  08
+00EC:  MOVWF  3F
+00ED:  MOVLW  06
+00EE:  MOVWF  40
+00EF:  MOVLW  05
+00F0:  MOVWF  41
+00F1:  MOVLW  04
+00F2:  MOVWF  42
+00F3:  MOVLW  02
+00F4:  MOVWF  43
+00F5:  MOVWF  44
+00F6:  MOVLW  01
+00F7:  MOVWF  45
+00F8:  CLRF   46
+00F9:  CLRF   47
+00FA:  CLRF   48
+00FB:  CLRF   49
+00FC:  MOVWF  4A
+00FD:  MOVLW  02
+00FE:  MOVWF  4B
+00FF:  MOVWF  4C
+0100:  MOVLW  04
+0101:  MOVWF  4D
+0102:  MOVLW  05
+0103:  MOVWF  4E
+0104:  MOVLW  06
+0105:  MOVWF  4F
+0106:  MOVLW  08
+0107:  MOVWF  50
+0108:  MOVLW  0A
+0109:  MOVWF  51
+010A:  MOVLW  0C
+010B:  MOVWF  52
+010C:  MOVLW  0E
+010D:  MOVWF  53
+010E:  MOVLW  10
+010F:  MOVWF  54
+0110:  MOVLW  13
+0111:  MOVWF  55
+0112:  MOVLW  15
+0113:  MOVWF  56
+0114:  MOVLW  18
+0115:  MOVWF  57
+0116:  MOVLW  1B
+0117:  MOVWF  58
+0118:  MOVLW  1E
+0119:  MOVWF  59
+011A:  MOVLW  22
+011B:  MOVWF  5A
+011C:  MOVLW  25
+011D:  MOVWF  5B
+011E:  MOVLW  29
+011F:  MOVWF  5C
+0120:  MOVLW  2D
+0121:  MOVWF  5D
+0122:  MOVLW  30
+0123:  MOVWF  5E
+0124:  MOVLW  34
+0125:  MOVWF  5F
+0126:  MOVLW  38
+0127:  MOVWF  60
+0128:  MOVLW  3D
+0129:  MOVWF  61
+012A:  MOVLW  41
+012B:  MOVWF  62
+012C:  MOVLW  45
+012D:  MOVWF  63
+012E:  MOVLW  4A
+012F:  MOVWF  64
+0130:  MOVLW  4E
+0131:  MOVWF  65
+0132:  MOVLW  53
+0133:  MOVWF  66
+0134:  MOVLW  58
+0135:  MOVWF  67
+0136:  MOVLW  5D
+0137:  MOVWF  68
+0138:  MOVLW  61
+0139:  MOVWF  69
+013A:  MOVLW  66
+013B:  MOVWF  6A
+013C:  MOVLW  6B
+013D:  MOVWF  6B
+013E:  MOVLW  70
+013F:  MOVWF  6C
+0140:  MOVLW  75
+0141:  MOVWF  6D
+0142:  MOVLW  7A
+0143:  MOVWF  6E
+0144:  MOVLW  7F
+0145:  MOVWF  6F
+....................  
+.................... void main() 
+.................... { 
+*
+0004:  CLRF   04
+0005:  BCF    03.7
+0006:  MOVLW  1F
+0007:  ANDWF  03,F
+0008:  BSF    03.5
+0009:  BSF    1F.0
+000A:  BSF    1F.1
+000B:  BSF    1F.2
+000C:  BCF    1F.3
+000D:  MOVLW  07
+000E:  MOVWF  1C
+....................  
+....................    unsigned int8 i; 
+....................    unsigned int16 t; 
+....................    setup_adc_ports(NO_ANALOGS); 
+*
+0148:  BSF    1F.0
+0149:  BSF    1F.1
+014A:  BSF    1F.2
+014B:  BCF    1F.3
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+014C:  BCF    1F.6
+014D:  BCF    03.5
+014E:  BCF    1F.6
+014F:  BCF    1F.7
+0150:  BSF    03.5
+0151:  BCF    1F.7
+0152:  BCF    03.5
+0153:  BSF    1F.0
+....................    setup_psp(PSP_DISABLED); 
+0154:  BSF    03.5
+0155:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED); 
+0156:  BCF    03.5
+0157:  BCF    14.5
+0158:  BCF    71.5
+0159:  MOVF   71,W
+015A:  BSF    03.5
+015B:  MOVWF  07
+015C:  BSF    71.4
+015D:  MOVF   71,W
+015E:  MOVWF  07
+015F:  BCF    71.3
+0160:  MOVF   71,W
+0161:  MOVWF  07
+0162:  MOVLW  01
+0163:  BCF    03.5
+0164:  MOVWF  14
+0165:  MOVLW  00
+0166:  BSF    03.5
+0167:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+0168:  MOVF   01,W
+0169:  ANDLW  C7
+016A:  IORLW  08
+016B:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+016C:  BCF    03.5
+016D:  CLRF   10
+....................    setup_timer_2(T2_DIV_BY_4,249,1); 
+016E:  MOVLW  00
+016F:  MOVWF  78
+0170:  IORLW  05
+0171:  MOVWF  12
+0172:  MOVLW  F9
+0173:  BSF    03.5
+0174:  MOVWF  12
+....................    setup_ccp1(CCP_PWM); 
+0175:  BCF    71.2
+0176:  MOVF   71,W
+0177:  MOVWF  07
+0178:  BCF    03.5
+0179:  BCF    07.2
+017A:  MOVLW  0C
+017B:  MOVWF  17
+....................    set_pwm1_duty(0); 
+017C:  CLRF   15
+....................    setup_comparator(NC_NC_NC_NC); 
+017D:  MOVLW  07
+017E:  BSF    03.5
+017F:  MOVWF  1C
+0180:  MOVF   05,W
+0181:  MOVWF  05
+0182:  MOVLW  04
+0183:  MOVWF  77
+0184:  DECFSZ 77,F
+0185:  GOTO   184
+0186:  GOTO   187
+0187:  MOVF   1C,W
+0188:  BCF    03.5
+0189:  BCF    0D.6
+....................    setup_vref(FALSE); 
+018A:  BSF    03.5
+018B:  CLRF   1D
+....................    while(true){ 
+....................       for(i=0;i<82;i++){ 
+018C:  BCF    03.5
+018D:  BSF    03.6
+018E:  CLRF   10
+018F:  MOVF   10,W
+0190:  SUBLW  51
+0191:  BTFSS  03.0
+0192:  GOTO   1A3
+....................         set_pwm1_duty(ton[i]); 
+0193:  MOVLW  20
+0194:  ADDWF  10,W
+0195:  MOVWF  04
+0196:  BCF    03.7
+0197:  MOVF   00,W
+0198:  MOVWF  13
+0199:  BCF    03.6
+019A:  MOVWF  15
+....................         delay_us(48); 
+019B:  MOVLW  17
+019C:  MOVWF  77
+019D:  DECFSZ 77,F
+019E:  GOTO   19D
+019F:  GOTO   1A0
+....................       } 
+01A0:  BSF    03.6
+01A1:  INCF   10,F
+01A2:  GOTO   18F
+....................    
+....................       for(i=0;i<81;i++){ 
+01A3:  CLRF   10
+01A4:  MOVF   10,W
+01A5:  SUBLW  50
+01A6:  BTFSS  03.0
+01A7:  GOTO   1B8
+....................         set_pwm1_duty(ton2[i]); 
+01A8:  MOVLW  A0
+01A9:  ADDWF  10,W
+01AA:  MOVWF  04
+01AB:  BCF    03.7
+01AC:  MOVF   00,W
+01AD:  MOVWF  13
+01AE:  BCF    03.6
+01AF:  MOVWF  15
+....................         delay_us(48); 
+01B0:  MOVLW  17
+01B1:  MOVWF  77
+01B2:  DECFSZ 77,F
+01B3:  GOTO   1B2
+01B4:  GOTO   1B5
+....................      } 
+01B5:  BSF    03.6
+01B6:  INCF   10,F
+01B7:  GOTO   1A4
+....................    } 
+01B8:  GOTO   18E
+.................... } 
+01B9:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NODEBUG NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT

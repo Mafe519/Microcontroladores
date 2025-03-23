@@ -1,0 +1,49 @@
+
+ROM used: 403 (5%)
+          403 (5%) including unused fragments
+
+          1 Average locations per line
+          17 Average locations per statement
+
+RAM used: 16 (4%) at main() level
+          26 (7%) worst case
+
+Stack used: 1 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   70    24 100  ServoMirrorMain.c
+  326     0   0  ..\..\Program Files (x86)\PICC\devices\16F877A.h
+----- -----
+  396    24 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     15   4   1             @delay_us1
+0    201  50  10   830  7.2  main
+0     31   8   2             @ITOF
+0    119  30  13             @MULFF
+0     33   8   4             @SFTOI
+
+Program metrics:
+    Functions               1
+    Statements              24
+    Comments                84
+    Volume (V)              839
+    Difficilty (D)          6.8
+    Effort to implement (E) 5702
+    Time to implement (T)   5 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    134
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   399  1645  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

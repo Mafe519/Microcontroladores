@@ -1,0 +1,214 @@
+CCS PCM C Compiler, Version 4.104, 5967               21-mar-24 17:53
+
+               Filename: C:\Micro\receptorImfraVer.lst
+
+               ROM used: 152 words (2%)
+                         Largest free fragment is 2048
+               RAM used: 15 (4%) at main() level
+                         16 (4%) worst case
+               Stack:    2 worst case (1 in main + 1 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   059
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  BCF    03.7
+0016:  BCF    03.5
+0017:  MOVLW  8C
+0018:  MOVWF  04
+0019:  BTFSS  00.2
+001A:  GOTO   01D
+001B:  BTFSC  0C.2
+001C:  GOTO   02E
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   20,W
+0028:  MOVWF  0A
+0029:  SWAPF  21,W
+002A:  MOVWF  03
+002B:  SWAPF  7F,F
+002C:  SWAPF  7F,W
+002D:  RETFIE
+002E:  BCF    0A.3
+002F:  BCF    0A.4
+0030:  GOTO   031
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=10 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES BROWNOUT                 //Reset when brownout detected 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=6000000) 
+*
+0042:  MOVLW  2A
+0043:  MOVWF  04
+0044:  BCF    03.7
+0045:  MOVF   00,W
+0046:  BTFSC  03.2
+0047:  GOTO   056
+0048:  MOVLW  01
+0049:  MOVWF  78
+004A:  CLRF   77
+004B:  DECFSZ 77,F
+004C:  GOTO   04B
+004D:  DECFSZ 78,F
+004E:  GOTO   04A
+004F:  MOVLW  F1
+0050:  MOVWF  77
+0051:  DECFSZ 77,F
+0052:  GOTO   051
+0053:  NOP
+0054:  DECFSZ 00,F
+0055:  GOTO   048
+0056:  BCF    0A.3
+0057:  BCF    0A.4
+0058:  GOTO   092 (RETURN)
+....................  
+....................  
+.................... #define IR_INPUT PIN_C2 
+.................... #define IR_OUTPUT PIN_D0 
+....................  
+.................... unsigned int16 ir_width; 
+....................  
+.................... #INT_CCP1 
+.................... void ccp1_isr(void) { 
+....................    ir_width = get_timer1(); 
+*
+0031:  MOVF   0F,W
+0032:  MOVWF  7A
+0033:  MOVF   0E,W
+0034:  MOVWF  77
+0035:  MOVF   0F,W
+0036:  SUBWF  7A,W
+0037:  BTFSS  03.2
+0038:  GOTO   031
+0039:  MOVF   77,W
+003A:  MOVWF  27
+003B:  MOVF   7A,W
+003C:  MOVWF  28
+....................    clear_interrupt(INT_CCP1); 
+003D:  BCF    0C.2
+.................... } 
+....................  
+003E:  BCF    0C.2
+003F:  BCF    0A.3
+0040:  BCF    0A.4
+0041:  GOTO   01D
+.................... void main() { 
+*
+0059:  CLRF   04
+005A:  BCF    03.7
+005B:  MOVLW  1F
+005C:  ANDWF  03,F
+005D:  BSF    03.5
+005E:  BSF    1F.0
+005F:  BSF    1F.1
+0060:  BSF    1F.2
+0061:  BCF    1F.3
+0062:  MOVLW  07
+0063:  MOVWF  1C
+....................    setup_timer_1(T1_INTERNAL | T1_DIV_BY_2); // Configura o timer1 para uma frequência de 1MHz (metade do clock de 6MHz) 
+*
+0067:  MOVLW  95
+0068:  MOVWF  10
+....................    setup_ccp1(CCP_CAPTURE_RE); // Configura CCP1 para captura de borda de subida 
+0069:  BSF    29.2
+006A:  MOVF   29,W
+006B:  BSF    03.5
+006C:  MOVWF  07
+006D:  BCF    03.5
+006E:  CLRF   17
+006F:  MOVLW  05
+0070:  MOVWF  17
+....................    enable_interrupts(INT_CCP1); // Habilita interrupção CCP1 
+0071:  BSF    03.5
+0072:  BSF    0C.2
+....................    enable_interrupts(GLOBAL); // Habilita todas as interrupções globais 
+0073:  MOVLW  C0
+0074:  BCF    03.5
+0075:  IORWF  0B,F
+....................     
+....................    while(TRUE) { 
+....................       // Se um pulso IR foi detectado 
+....................       if (ir_width > 1000 && ir_width < 2000) { 
+0076:  MOVF   28,W
+0077:  SUBLW  02
+0078:  BTFSC  03.0
+0079:  GOTO   096
+007A:  XORLW  FF
+007B:  BTFSS  03.2
+007C:  GOTO   081
+007D:  MOVF   27,W
+007E:  SUBLW  E8
+007F:  BTFSC  03.0
+0080:  GOTO   096
+0081:  MOVF   28,W
+0082:  SUBLW  07
+0083:  BTFSS  03.0
+0084:  GOTO   096
+0085:  BTFSS  03.2
+0086:  GOTO   08B
+0087:  MOVF   27,W
+0088:  SUBLW  CF
+0089:  BTFSS  03.0
+008A:  GOTO   096
+....................          output_low(IR_OUTPUT); // Ligar saída IR 
+008B:  BSF    03.5
+008C:  BCF    08.0
+008D:  BCF    03.5
+008E:  BCF    08.0
+....................          delay_ms(10); // Aguardar um curto período de tempo 
+008F:  MOVLW  0A
+0090:  MOVWF  2A
+0091:  GOTO   042
+....................          output_high(IR_OUTPUT); // Desligar saída IR 
+0092:  BSF    03.5
+0093:  BCF    08.0
+0094:  BCF    03.5
+0095:  BSF    08.0
+....................       } 
+....................    } 
+0096:  GOTO   076
+.................... } 
+0097:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F7A   HS NOWDT NOPUT NODEBUG NOPROTECT BROWNOUT NOLVP NOCPD NOWRT
