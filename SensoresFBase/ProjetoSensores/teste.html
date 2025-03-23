@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados dos Sensores</title>
+    <!-- Firebase App (base) SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js';
+        import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js';
+
+        // Configurações do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBz6ipvQz3jOxOcaOWjyeRV327xvX7JgN4",
+            authDomain: "sensorfirebase-dd9ec.firebaseapp.com",
+            databaseURL: "https://sensorfirebase-dd9ec-default-rtdb.firebaseio.com",
+            projectId: "sensorfirebase-dd9ec",
+            storageBucket: "sensorfirebase-dd9ec.appspot.com",
+            messagingSenderId: "24039269341",
+            appId: "1:24039269341:web:4723bda14492ea2bf64c34"
+        };
+
+        // Inicializa o Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Referência para o Realtime Database
+        const dbRef = ref(db, 'Dados');
+
+        // Dados para os gráficos
+        const labels = [];
+        const temperaturaData = [];
+        const estadoPortaData = [];
+
+        // Função para atualizar os dados
+        function updateData(snapshot) {
+            const data = snapshot.val();
+            if (data) {
+                const timestamp = new Date().toLocaleTimeString();
+                labels.push(timestamp);
+                temperaturaData.push(data.Temperatura !== undefined ? data.Temperatura : 0);
+                estadoPortaData.push(data.EstadoPorta === "A porta esta Aberta!" ? 1 : 0);
+
+                if (labels.length > 10) { // Limita o número de pontos no gráfico
+                    labels.shift();
+                    temperaturaData.shift();
+                    estadoPortaData.shift();
+                }
+
+                document.getElementById('estado-porta-value').textContent = data.EstadoPorta !== undefined ? data.EstadoPorta : 'N/A';
+                document.getElementById('temperatura-value').textContent = data.Temperatura !== undefined ? data.Temperatura.toFixed(2) + 'ºC' : 'N/A';
+
+                updateCharts();
+            } else {
+                document.getElementById('estado-porta-value').textContent = 'N/A';
+                document.getElementById('temperatura-value').textContent = 'N/A';
+            }
+        }
+
+        // Função para atualizar os gráficos
+        function updateCharts() {
+            temperaturaChart.data.labels = labels;
+            temperaturaChart.data.datasets[0].data = temperaturaData;
+            temperaturaChart.update();
+
+            estadoPortaChart.data.labels = labels;
+            estadoPortaChart.data.datasets[0].data = estadoPortaData;
+            estadoPortaChart.update();
+        }
+
+        // Adiciona listener para atualizações em tempo real
+        onValue(dbRef, (snapshot) => {
+            updateData(snapshot);
+        }, (error) => {
+            console.error('Erro ao acessar dados do Firebase:', error);
+            document.getElementById('estado-porta-value').textContent = 'Erro';
+            document.getElementById('temperatura-value').textContent = 'Erro';
+        });
+
+        // Variáveis para os gráficos
+        let temperaturaChart, estadoPortaChart;
+
+        window.addEventListener('load', () => {
+            const ctxTemperatura = document.getElementById('temperatura-chart').getContext('2d');
+            const ctxEstadoPorta = document.getElementById('estado-porta-chart').getContext('2d');
+
+            temperaturaChart = new Chart(ctxTemperatura, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Temperatura (°C)',
+                        data: temperaturaData,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'Tempo' } },
+                        y: { 
+                            title: { display: true, text: 'Temperatura (°C)' },
+                            min: 0,
+                            max: 60
+                        }
+                    }
+                }
+            });
+
+            estadoPortaChart = new Chart(ctxEstadoPorta, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Estado da Porta (Aberta = 1, Fechada = 0)',
+                        data: estadoPortaData,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { title: { display: true, text: 'Tempo' } },
+                        y: { 
+                            title: { display: true, text: 'Estado da Porta' },
+                            min: 0,
+                            max: 1
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .card h2 {
+            margin: 10px 0;
+            font-size: 24px;
+            color: #2c3e50;
+        }
+        .card span {
+            font-size: 20px;
+            color: #3498db;
+        }
+        canvas {
+            max-width: 100%;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dados dos Sensores</h1>
+        <div class="card">
+            <h2>Temperatura:</h2>
+            <span id="temperatura-value">Carregando...</span>
+        </div>
+        <div class="card">
+            <h2>Estado da Porta:</h2>
+            <span id="estado-porta-value">Carregando...</span>
+        </div>
+        <canvas id="temperatura-chart"></canvas>
+        <canvas id="estado-porta-chart"></canvas>
+    </div>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
