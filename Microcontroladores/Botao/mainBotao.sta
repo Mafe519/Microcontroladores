@@ -1,0 +1,45 @@
+
+ROM used: 96 (1%)
+          96 (1%) including unused fragments
+
+          0 Average locations per line
+          6 Average locations per statement
+
+RAM used: 6 (2%) at main() level
+          6 (2%) worst case
+
+Stack used: 0 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   40    15 100  mainBotao.c
+  326     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F877A.h
+----- -----
+  366    15 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     92  96   0   331  3.7  main
+
+Program metrics:
+    Functions               1
+    Statements              15
+    Comments                76
+    Volume (V)              331
+    Difficilty (D)          3.7
+    Effort to implement (E) 1234
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    137
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF    92  1952  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

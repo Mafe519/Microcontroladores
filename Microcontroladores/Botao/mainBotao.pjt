@@ -1,0 +1,25 @@
+[PROJECT]
+Target=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\Botao\mainBotao.hex
+Development_Mode=
+Processor_Text=PIC16F877A
+ToolSuite=CCS
+Processor=0x877A
+[C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\Botao\mainBotao]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\Botao\mainBotao.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\Botao\mainBotao
+[Opened Files]
+1=..\Botao\mainBotao.c
+2=mainBotao.h
+3=

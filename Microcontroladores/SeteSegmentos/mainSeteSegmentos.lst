@@ -1,0 +1,257 @@
+CCS PCM C Compiler, Version 4.104, 5967               15-fev-24 16:10
+
+               Filename: C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\SeteSegmentos\mainSeteSegmentos.lst
+
+               ROM used: 211 words (10%)
+                         Largest free fragment is 1837
+               RAM used: 6 (3%) at main() level
+                         12 (5%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   04A
+0003:  NOP
+.................... #include <16F628A.h> 
+.................... //////// Standard Header file for the PIC16F628A device //////////////// 
+.................... #device PIC16F628A 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES XT                       //Crystal osc <= 4mhz for PCM/PCH , 3mhz to 10 mhz for PCD 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES BROWNOUT                 //Reset when brownout detected 
+.................... #FUSES MCLR                     //Master Clear pin enabled 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=4000000) 
+0035:  MOVLW  25
+0036:  MOVWF  04
+0037:  BCF    03.7
+0038:  MOVF   00,W
+0039:  BTFSC  03.2
+003A:  GOTO   049
+003B:  MOVLW  01
+003C:  MOVWF  78
+003D:  CLRF   77
+003E:  DECFSZ 77,F
+003F:  GOTO   03E
+0040:  DECFSZ 78,F
+0041:  GOTO   03D
+0042:  MOVLW  4A
+0043:  MOVWF  77
+0044:  DECFSZ 77,F
+0045:  GOTO   044
+0046:  GOTO   047
+0047:  DECFSZ 00,F
+0048:  GOTO   03B
+0049:  RETURN
+....................  
+.................... #define  DELAY 20 
+.................... #define  TIMER 10 
+....................  
+.................... byte const unidade[10]={ 
+....................    0b11111110,    //0 
+....................    0b00111000,    //1 
+....................    0b11011101,    //2 
+....................    0b01111101,    //3 
+....................    0b00111011,    //4 
+....................    0b01110111,    //5 
+....................    0b11110111,    //6 
+....................    0b00111100,    //7 
+....................    0b11111111,    //8 
+....................    0b01111111     //9 
+....................    }; 
+.................... byte const dezena[10]={ 
+....................    0b11101110,    //0 
+....................    0b00101000,    //1 
+....................    0b11001101,    //2 
+....................    0b01101101,    //3 
+....................    0b00101011,    //4 
+....................    0b01100111,    //5 
+....................    0b11100111,    //6 
+....................    0b00101100,    //7 
+....................    0b11101111,    //8 
+....................    0b01101111     //9 
+....................    }; 
+....................  
+.................... void main() 
+.................... { 
+004A:  CLRF   04
+004B:  BCF    03.7
+004C:  MOVLW  1F
+004D:  ANDWF  03,F
+004E:  MOVLW  07
+004F:  MOVWF  1F
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+0050:  BSF    03.5
+0051:  MOVF   01,W
+0052:  ANDLW  C7
+0053:  IORLW  08
+0054:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+0055:  BCF    03.5
+0056:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0057:  MOVLW  00
+0058:  MOVWF  78
+0059:  MOVWF  12
+005A:  MOVLW  00
+005B:  BSF    03.5
+005C:  MOVWF  12
+....................    setup_comparator(NC_NC_NC_NC); 
+005D:  MOVLW  07
+005E:  BCF    03.5
+005F:  MOVWF  1F
+0060:  BSF    03.5
+0061:  MOVF   05,W
+0062:  MOVWF  05
+0063:  MOVLW  03
+0064:  MOVWF  77
+0065:  DECFSZ 77,F
+0066:  GOTO   065
+0067:  BCF    03.5
+0068:  MOVF   1F,W
+0069:  BCF    0C.6
+....................    setup_vref(FALSE); 
+006A:  BSF    03.5
+006B:  CLRF   1F
+....................    //Setup_Oscillator parameter not selected from Intr Oscillator Config tab 
+....................  
+....................    // TODO: USER CODE!! 
+....................  
+....................    while(true) { 
+....................       int i, j, u, d; 
+....................       for(i=0; i<100; i++) { 
+006C:  BCF    03.5
+006D:  CLRF   21
+006E:  MOVF   21,W
+006F:  SUBLW  63
+0070:  BTFSS  03.0
+0071:  GOTO   09F
+....................          d = i/10; 
+0072:  MOVF   21,W
+0073:  MOVWF  25
+0074:  MOVLW  0A
+0075:  MOVWF  26
+0076:  CALL   020
+0077:  MOVF   78,W
+0078:  MOVWF  24
+....................          u = i%10; 
+0079:  MOVF   21,W
+007A:  MOVWF  25
+007B:  MOVLW  0A
+007C:  MOVWF  26
+007D:  CALL   020
+007E:  MOVF   77,W
+007F:  MOVWF  23
+....................          for(j=0; j<TIMER; j++) { 
+0080:  CLRF   22
+0081:  MOVF   22,W
+0082:  SUBLW  09
+0083:  BTFSS  03.0
+0084:  GOTO   09D
+....................             output_b(unidade[u]); 
+0085:  MOVF   23,W
+0086:  CALL   004
+0087:  MOVWF  25
+0088:  BSF    03.5
+0089:  CLRF   06
+008A:  BCF    03.5
+008B:  MOVF   25,W
+008C:  MOVWF  06
+....................             delay_ms(DELAY); 
+008D:  MOVLW  14
+008E:  MOVWF  25
+008F:  CALL   035
+....................             output_b(dezena[d]); 
+0090:  MOVF   24,W
+0091:  CALL   012
+0092:  MOVWF  25
+0093:  BSF    03.5
+0094:  CLRF   06
+0095:  BCF    03.5
+0096:  MOVF   25,W
+0097:  MOVWF  06
+....................             delay_ms(DELAY); 
+0098:  MOVLW  14
+0099:  MOVWF  25
+009A:  CALL   035
+....................          } 
+009B:  INCF   22,F
+009C:  GOTO   081
+....................       } 
+009D:  INCF   21,F
+009E:  GOTO   06E
+....................       for(i=98; i>0; i--) { 
+009F:  MOVLW  62
+00A0:  MOVWF  21
+00A1:  MOVF   21,F
+00A2:  BTFSC  03.2
+00A3:  GOTO   0D1
+....................          d = i/10; 
+00A4:  MOVF   21,W
+00A5:  MOVWF  25
+00A6:  MOVLW  0A
+00A7:  MOVWF  26
+00A8:  CALL   020
+00A9:  MOVF   78,W
+00AA:  MOVWF  24
+....................          u = i%10; 
+00AB:  MOVF   21,W
+00AC:  MOVWF  25
+00AD:  MOVLW  0A
+00AE:  MOVWF  26
+00AF:  CALL   020
+00B0:  MOVF   77,W
+00B1:  MOVWF  23
+....................          for(j=0; j<TIMER; j++) { 
+00B2:  CLRF   22
+00B3:  MOVF   22,W
+00B4:  SUBLW  09
+00B5:  BTFSS  03.0
+00B6:  GOTO   0CF
+....................             output_b(unidade[u]); 
+00B7:  MOVF   23,W
+00B8:  CALL   004
+00B9:  MOVWF  25
+00BA:  BSF    03.5
+00BB:  CLRF   06
+00BC:  BCF    03.5
+00BD:  MOVF   25,W
+00BE:  MOVWF  06
+....................             delay_ms(DELAY); 
+00BF:  MOVLW  14
+00C0:  MOVWF  25
+00C1:  CALL   035
+....................             output_b(dezena[d]); 
+00C2:  MOVF   24,W
+00C3:  CALL   012
+00C4:  MOVWF  25
+00C5:  BSF    03.5
+00C6:  CLRF   06
+00C7:  BCF    03.5
+00C8:  MOVF   25,W
+00C9:  MOVWF  06
+....................             delay_ms(DELAY); 
+00CA:  MOVLW  14
+00CB:  MOVWF  25
+00CC:  CALL   035
+....................          } 
+00CD:  INCF   22,F
+00CE:  GOTO   0B3
+....................       } 
+00CF:  DECF   21,F
+00D0:  GOTO   0A1
+....................    } 
+00D1:  GOTO   06D
+.................... } 
+00D2:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F69   XT NOWDT NOPUT NOPROTECT BROWNOUT MCLR NOLVP NOCPD

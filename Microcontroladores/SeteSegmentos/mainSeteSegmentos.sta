@@ -1,0 +1,46 @@
+
+ROM used: 211 (10%)
+          211 (10%) including unused fragments
+
+          1 Average locations per line
+          8 Average locations per statement
+
+RAM used: 6 (3%) at main() level
+          12 (5%) worst case
+
+Stack used: 1 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   78    27 100  mainSeteSegmentos.c
+  222     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F628A.h
+----- -----
+  300    27 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     21  10   1             @delay_ms1
+0     14   7   0             @const61
+0     14   7   0             @const63
+0    137  65   1  1014  7.3  main
+0     21  10   3             @DIV88
+
+Program metrics:
+    Functions               1
+    Statements              27
+    Comments                85
+    Volume (V)              1024
+    Difficilty (D)          6.9
+    Effort to implement (E) 7083
+    Time to implement (T)   7 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   4
+    Maintainability (MI)    130
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF   207  1837  
+
+
+

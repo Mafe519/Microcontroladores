@@ -1,0 +1,15 @@
+*** Error 18 "mainTecladoMatricial.c" Line 25(10,21): File can not be opened
+    Not in local "C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\TecladoMatricial\mod_lcd.c"
+    Not in "C:\Program Files (x86)\PICC\devices\mod_lcd.c"
+    Not in "C:\Program Files (x86)\PICC\drivers\mod_lcd.c"
+*** Error 18 "mainTecladoMatricial.c" Line 27(10,28): File can not be opened
+    Not in local "C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\TecladoMatricial\kbd_ext_board2.c"
+    Not in "C:\Program Files (x86)\PICC\devices\kbd_ext_board2.c"
+    Not in "C:\Program Files (x86)\PICC\drivers\kbd_ext_board2.c"
+*** Error 12 "mainTecladoMatricial.c" Line 42(11,12): Undefined identifier  -- lcd_ini
+*** Error 12 "mainTecladoMatricial.c" Line 45(12,23): Undefined identifier   lcd_escreve
+*** Error 12 "mainTecladoMatricial.c" Line 48(12,23): Undefined identifier   lcd_escreve
+*** Error 12 "mainTecladoMatricial.c" Line 54(21,22): Undefined identifier  -- tc_tecla
+*** Error 12 "mainTecladoMatricial.c" Line 57(18,29): Undefined identifier   lcd_escreve
+*** Error 12 "mainTecladoMatricial.c" Line 60(18,29): Undefined identifier   lcd_escreve
+      8 Errors,  0 Warnings.

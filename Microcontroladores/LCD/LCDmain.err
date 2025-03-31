@@ -1,0 +1,8 @@
+*** Error 12 "C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\LCD\mod_lcd.c" Line 80(9,10): Undefined identifier  -- delay_us
+*** Error 12 "C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\LCD\mod_lcd.c" Line 107(9,10): Undefined identifier  -- delay_ms
+*** Error 12 "C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\LCD\mod_lcd.c" Line 114(9,10): Undefined identifier  -- delay_ms
+*** Error 12 "C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\LCD\mod_lcd.c" Line 138(11,12): Undefined identifier  -- delay_ms
+*** Error 23 "LCDmain.c" Line 3(8,9): Can not change device type this far into the code
+*** Error 48 "LCDmain.c" Line 3(9,12): Expecting a (
+*** Error 43 "LCDmain.c" Line 3(13,14): Expecting a declaration
+      7 Errors,  0 Warnings.

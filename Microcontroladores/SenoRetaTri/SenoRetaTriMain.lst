@@ -1,0 +1,490 @@
+CCS PCM C Compiler, Version 4.104, 5967               20-fev-24 17:08
+
+               Filename: C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\SenoRetaTri\SenoRetaTriMain.lst
+
+               ROM used: 334 words (4%)
+                         Largest free fragment is 2048
+               RAM used: 88 (24%) at main() level
+                         88 (24%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   029
+0003:  NOP
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                    //No Power Up Timer 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NODEBUG                  //No Debug mode for ICD 
+.................... #FUSES BROWNOUT                 //Reset when brownout detected 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                    //No EE protection 
+.................... #FUSES NOWRT                    //Program memory not write protected 
+.................... #FUSES RESERVED                 //Used to set the reserved FUSE bits 
+....................  
+.................... #use delay(clock=20000000) 
+*
+0004:  MOVLW  03
+0005:  SUBWF  72,F
+0006:  BTFSS  03.0
+0007:  GOTO   012
+0008:  MOVLW  72
+0009:  MOVWF  04
+000A:  BCF    03.7
+000B:  MOVF   00,W
+000C:  BTFSC  03.2
+000D:  GOTO   012
+000E:  GOTO   010
+000F:  GOTO   010
+0010:  DECFSZ 00,F
+0011:  GOTO   00F
+0012:  RETURN
+0013:  MOVLW  72
+0014:  MOVWF  04
+0015:  BCF    03.7
+0016:  MOVF   00,W
+0017:  BTFSC  03.2
+0018:  GOTO   026
+0019:  MOVLW  06
+001A:  MOVWF  78
+001B:  CLRF   77
+001C:  DECFSZ 77,F
+001D:  GOTO   01C
+001E:  DECFSZ 78,F
+001F:  GOTO   01B
+0020:  MOVLW  7B
+0021:  MOVWF  77
+0022:  DECFSZ 77,F
+0023:  GOTO   022
+0024:  DECFSZ 00,F
+0025:  GOTO   019
+0026:  BCF    0A.3
+0027:  BCF    0A.4
+0028:  GOTO   13B (RETURN)
+....................  
+.................... unsigned int i; 
+....................  
+.................... int8 seno[40]={ 
+....................    0, 
+....................    10, 
+....................    20, 
+....................    30, 
+....................    40, 
+....................    50, 
+....................    60, 
+....................    69, 
+....................    79, 
+....................    88, 
+....................    98, 
+....................    107, 
+....................    116, 
+....................    125, 
+....................    133, 
+....................    142, 
+....................    150, 
+....................    158, 
+....................    166, 
+....................    173, 
+....................    180, 
+....................    187, 
+....................    194, 
+....................    200, 
+....................    206, 
+....................    212, 
+....................    217, 
+....................    222, 
+....................    227, 
+....................    232, 
+....................    236, 
+....................    239, 
+....................    243, 
+....................    245, 
+....................    248, 
+....................    250, 
+....................    252, 
+....................    253, 
+....................    254, 
+....................    255 
+....................    }; 
+*
+0034:  BCF    03.5
+0035:  CLRF   21
+0036:  MOVLW  0A
+0037:  MOVWF  22
+0038:  MOVLW  14
+0039:  MOVWF  23
+003A:  MOVLW  1E
+003B:  MOVWF  24
+003C:  MOVLW  28
+003D:  MOVWF  25
+003E:  MOVLW  32
+003F:  MOVWF  26
+0040:  MOVLW  3C
+0041:  MOVWF  27
+0042:  MOVLW  45
+0043:  MOVWF  28
+0044:  MOVLW  4F
+0045:  MOVWF  29
+0046:  MOVLW  58
+0047:  MOVWF  2A
+0048:  MOVLW  62
+0049:  MOVWF  2B
+004A:  MOVLW  6B
+004B:  MOVWF  2C
+004C:  MOVLW  74
+004D:  MOVWF  2D
+004E:  MOVLW  7D
+004F:  MOVWF  2E
+0050:  MOVLW  85
+0051:  MOVWF  2F
+0052:  MOVLW  8E
+0053:  MOVWF  30
+0054:  MOVLW  96
+0055:  MOVWF  31
+0056:  MOVLW  9E
+0057:  MOVWF  32
+0058:  MOVLW  A6
+0059:  MOVWF  33
+005A:  MOVLW  AD
+005B:  MOVWF  34
+005C:  MOVLW  B4
+005D:  MOVWF  35
+005E:  MOVLW  BB
+005F:  MOVWF  36
+0060:  MOVLW  C2
+0061:  MOVWF  37
+0062:  MOVLW  C8
+0063:  MOVWF  38
+0064:  MOVLW  CE
+0065:  MOVWF  39
+0066:  MOVLW  D4
+0067:  MOVWF  3A
+0068:  MOVLW  D9
+0069:  MOVWF  3B
+006A:  MOVLW  DE
+006B:  MOVWF  3C
+006C:  MOVLW  E3
+006D:  MOVWF  3D
+006E:  MOVLW  E8
+006F:  MOVWF  3E
+0070:  MOVLW  EC
+0071:  MOVWF  3F
+0072:  MOVLW  EF
+0073:  MOVWF  40
+0074:  MOVLW  F3
+0075:  MOVWF  41
+0076:  MOVLW  F5
+0077:  MOVWF  42
+0078:  MOVLW  F8
+0079:  MOVWF  43
+007A:  MOVLW  FA
+007B:  MOVWF  44
+007C:  MOVLW  FC
+007D:  MOVWF  45
+007E:  MOVLW  FD
+007F:  MOVWF  46
+0080:  MOVLW  FE
+0081:  MOVWF  47
+0082:  MOVLW  FF
+0083:  MOVWF  48
+.................... int8 tri[40]={ 
+....................    249, 
+....................    242, 
+....................    236, 
+....................    230, 
+....................    223, 
+....................    217, 
+....................    210, 
+....................    204, 
+....................    198, 
+....................    191, 
+....................    185, 
+....................    179, 
+....................    172, 
+....................    166, 
+....................    159, 
+....................    153, 
+....................    147, 
+....................    140, 
+....................    134, 
+....................    128, 
+....................    121, 
+....................    115, 
+....................    108, 
+....................    102, 
+....................    96, 
+....................    89, 
+....................    83, 
+....................    77, 
+....................    70, 
+....................    64, 
+....................    57, 
+....................    51, 
+....................    45, 
+....................    38, 
+....................    32, 
+....................    26, 
+....................    19, 
+....................    13, 
+....................    6, 
+....................    0 
+....................    }; 
+0084:  MOVLW  F9
+0085:  MOVWF  49
+0086:  MOVLW  F2
+0087:  MOVWF  4A
+0088:  MOVLW  EC
+0089:  MOVWF  4B
+008A:  MOVLW  E6
+008B:  MOVWF  4C
+008C:  MOVLW  DF
+008D:  MOVWF  4D
+008E:  MOVLW  D9
+008F:  MOVWF  4E
+0090:  MOVLW  D2
+0091:  MOVWF  4F
+0092:  MOVLW  CC
+0093:  MOVWF  50
+0094:  MOVLW  C6
+0095:  MOVWF  51
+0096:  MOVLW  BF
+0097:  MOVWF  52
+0098:  MOVLW  B9
+0099:  MOVWF  53
+009A:  MOVLW  B3
+009B:  MOVWF  54
+009C:  MOVLW  AC
+009D:  MOVWF  55
+009E:  MOVLW  A6
+009F:  MOVWF  56
+00A0:  MOVLW  9F
+00A1:  MOVWF  57
+00A2:  MOVLW  99
+00A3:  MOVWF  58
+00A4:  MOVLW  93
+00A5:  MOVWF  59
+00A6:  MOVLW  8C
+00A7:  MOVWF  5A
+00A8:  MOVLW  86
+00A9:  MOVWF  5B
+00AA:  MOVLW  80
+00AB:  MOVWF  5C
+00AC:  MOVLW  79
+00AD:  MOVWF  5D
+00AE:  MOVLW  73
+00AF:  MOVWF  5E
+00B0:  MOVLW  6C
+00B1:  MOVWF  5F
+00B2:  MOVLW  66
+00B3:  MOVWF  60
+00B4:  MOVLW  60
+00B5:  MOVWF  61
+00B6:  MOVLW  59
+00B7:  MOVWF  62
+00B8:  MOVLW  53
+00B9:  MOVWF  63
+00BA:  MOVLW  4D
+00BB:  MOVWF  64
+00BC:  MOVLW  46
+00BD:  MOVWF  65
+00BE:  MOVLW  40
+00BF:  MOVWF  66
+00C0:  MOVLW  39
+00C1:  MOVWF  67
+00C2:  MOVLW  33
+00C3:  MOVWF  68
+00C4:  MOVLW  2D
+00C5:  MOVWF  69
+00C6:  MOVLW  26
+00C7:  MOVWF  6A
+00C8:  MOVLW  20
+00C9:  MOVWF  6B
+00CA:  MOVLW  1A
+00CB:  MOVWF  6C
+00CC:  MOVLW  13
+00CD:  MOVWF  6D
+00CE:  MOVLW  0D
+00CF:  MOVWF  6E
+00D0:  MOVLW  06
+00D1:  MOVWF  6F
+00D2:  CLRF   70
+....................     
+.................... void main() 
+.................... { 
+*
+0029:  CLRF   04
+002A:  BCF    03.7
+002B:  MOVLW  1F
+002C:  ANDWF  03,F
+002D:  BSF    03.5
+002E:  BSF    1F.0
+002F:  BSF    1F.1
+0030:  BSF    1F.2
+0031:  BCF    1F.3
+0032:  MOVLW  07
+0033:  MOVWF  1C
+....................  
+....................    setup_adc_ports(NO_ANALOGS); 
+*
+00D5:  BSF    03.5
+00D6:  BSF    1F.0
+00D7:  BSF    1F.1
+00D8:  BSF    1F.2
+00D9:  BCF    1F.3
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+00DA:  BCF    1F.6
+00DB:  BCF    03.5
+00DC:  BCF    1F.6
+00DD:  BCF    1F.7
+00DE:  BSF    03.5
+00DF:  BCF    1F.7
+00E0:  BCF    03.5
+00E1:  BSF    1F.0
+....................    setup_psp(PSP_DISABLED); 
+00E2:  BSF    03.5
+00E3:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED); 
+00E4:  BCF    03.5
+00E5:  BCF    14.5
+00E6:  BCF    71.5
+00E7:  MOVF   71,W
+00E8:  BSF    03.5
+00E9:  MOVWF  07
+00EA:  BSF    71.4
+00EB:  MOVF   71,W
+00EC:  MOVWF  07
+00ED:  BCF    71.3
+00EE:  MOVF   71,W
+00EF:  MOVWF  07
+00F0:  MOVLW  01
+00F1:  BCF    03.5
+00F2:  MOVWF  14
+00F3:  MOVLW  00
+00F4:  BSF    03.5
+00F5:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+00F6:  MOVF   01,W
+00F7:  ANDLW  C7
+00F8:  IORLW  08
+00F9:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+00FA:  BCF    03.5
+00FB:  CLRF   10
+....................    setup_timer_2(T2_DIV_BY_16,255,1); 
+00FC:  MOVLW  00
+00FD:  MOVWF  78
+00FE:  IORLW  06
+00FF:  MOVWF  12
+0100:  MOVLW  FF
+0101:  BSF    03.5
+0102:  MOVWF  12
+....................    setup_ccp1(CCP_PWM); 
+0103:  BCF    71.2
+0104:  MOVF   71,W
+0105:  MOVWF  07
+0106:  BCF    03.5
+0107:  BCF    07.2
+0108:  MOVLW  0C
+0109:  MOVWF  17
+....................    setup_ccp2(CCP_OFF); 
+010A:  BSF    71.1
+010B:  MOVF   71,W
+010C:  BSF    03.5
+010D:  MOVWF  07
+010E:  BCF    03.5
+010F:  CLRF   1D
+....................    set_pwm1_duty(512); 
+0110:  MOVLW  80
+0111:  MOVWF  15
+0112:  MOVF   17,W
+0113:  ANDLW  CF
+0114:  MOVWF  17
+....................    setup_comparator(NC_NC_NC_NC); 
+0115:  MOVLW  07
+0116:  BSF    03.5
+0117:  MOVWF  1C
+0118:  MOVF   05,W
+0119:  MOVWF  05
+011A:  MOVLW  10
+011B:  MOVWF  77
+011C:  DECFSZ 77,F
+011D:  GOTO   11C
+011E:  NOP
+011F:  MOVF   1C,W
+0120:  BCF    03.5
+0121:  BCF    0D.6
+....................    setup_vref(FALSE); 
+0122:  BSF    03.5
+0123:  CLRF   1D
+....................  
+....................    // TODO: USER CODE!! 
+....................    while(true){ 
+....................       for(i = 0; i < 40; i++){ 
+0124:  BCF    03.5
+0125:  CLRF   20
+0126:  MOVF   20,W
+0127:  SUBLW  27
+0128:  BTFSS  03.0
+0129:  GOTO   136
+....................          set_pwm1_duty(seno[i]); 
+012A:  MOVLW  21
+012B:  ADDWF  20,W
+012C:  MOVWF  04
+012D:  BCF    03.7
+012E:  MOVF   00,W
+012F:  MOVWF  72
+0130:  MOVWF  15
+....................          delay_us(250); 
+0131:  MOVLW  FA
+0132:  MOVWF  72
+0133:  CALL   004
+....................       } 
+0134:  INCF   20,F
+0135:  GOTO   126
+....................        
+....................       set_pwm1_duty(255); 
+0136:  MOVLW  FF
+0137:  MOVWF  15
+....................        
+....................       delay_ms(10); 
+0138:  MOVLW  0A
+0139:  MOVWF  72
+013A:  GOTO   013
+....................  
+....................       for(i = 0; i < 40; i++){ 
+013B:  CLRF   20
+013C:  MOVF   20,W
+013D:  SUBLW  27
+013E:  BTFSS  03.0
+013F:  GOTO   14C
+....................          set_pwm1_duty(tri[i]); 
+0140:  MOVLW  49
+0141:  ADDWF  20,W
+0142:  MOVWF  04
+0143:  BCF    03.7
+0144:  MOVF   00,W
+0145:  MOVWF  72
+0146:  MOVWF  15
+....................          delay_us(250); 
+0147:  MOVLW  FA
+0148:  MOVWF  72
+0149:  CALL   004
+....................       } 
+014A:  INCF   20,F
+014B:  GOTO   13C
+....................    } 
+014C:  GOTO   125
+.................... } 
+014D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F7A   HS NOWDT NOPUT NODEBUG NOPROTECT BROWNOUT NOLVP NOCPD NOWRT

@@ -1,0 +1,23 @@
+[PROJECT]
+Target=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\SeteSegmentosPIC16F877A\mainSeteSegmentosPIC16F877A.hex
+Development_Mode=
+Processor_Text=PIC16F877A
+ToolSuite=CCS
+[C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\SeteSegmentosPIC16F877A\mainSeteSegmentosPIC16F877A]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\SeteSegmentosPIC16F877A\mainSeteSegmentosPIC16F877A.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\SeteSegmentosPIC16F877A\mainSeteSegmentosPIC16F877A
+[Opened Files]
+1=mainSeteSegmentosPIC16F877A.c
+2=

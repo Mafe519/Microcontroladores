@@ -1,0 +1,12 @@
+ÀÄEng
+   ÀÄMAIN  0/93  Ram=0
+      ÃÄ??0??
+      ÀÄlcd_ini  0/92  Ram=2
+         ÃÄ@delay_ms1  0/20  Ram=1
+         ÃÄlcd_envia_nibble  0/39  Ram=1
+         ÃÄ@delay_ms1  0/20  Ram=1
+         ÃÄlcd_envia_nibble  0/39  Ram=1
+         ÃÄ@const69  0/8  Ram=0
+         ÀÄlcd_envia_byte  (Inline)  Ram=3
+            ÃÄlcd_envia_nibble  0/39  Ram=1
+            ÀÄlcd_envia_nibble  0/39  Ram=1

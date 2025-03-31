@@ -1,0 +1,27 @@
+[PROJECT]
+Target=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\DuasPlacas\DuasPlacas.hex
+Development_Mode=
+Processor_Text=PIC16F877A
+ToolSuite=CCS
+Processor=0x877A
+[C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\DuasPlacas\DuasPlacas]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\DuasPlacas\DuasPlacas.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Users\julio\OneDrive\Documentos\Julio Cesar Jauer\Eng. da Comp. IFMT\Microcontroladores\DuasPlacas\DuasPlacas
+[Opened Files]
+1=..\..\..\servomotor01 (1).c
+2=..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\SERVOS.C
+3=
+4=mainPrimeira.c
+5=
